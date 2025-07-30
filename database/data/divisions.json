@@ -31,5 +31,9 @@
     {
         "id": 8,
         "division_name": "Marketing and Business Development Department"
+    },
+    {
+        "id": 9,
+        "division_name": "Bids and Awards Committee"
     }
 ]
