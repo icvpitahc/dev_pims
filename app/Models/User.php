@@ -121,4 +121,22 @@ class User extends Authenticatable implements Auditable, MustVerifyEmail
                 });
         });
     }
+
+    public function getSignatureNameAttribute()
+    {
+        $firstNameInitials = '';
+        if ($this->first_name) {
+            $names = explode(' ', $this->first_name);
+            foreach ($names as $name) {
+                $firstNameInitials .= strtoupper(substr($name, 0, 1));
+            }
+        }
+
+        $middleNameInitial = '';
+        if ($this->middle_name) {
+            $middleNameInitial = strtoupper(substr($this->middle_name, 0, 1));
+        }
+
+        return $firstNameInitials . $middleNameInitial . ucfirst(strtolower($this->last_name));
+    }
 }

@@ -38,5 +38,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(SubRequestTypesTableSeeder::class);
         // $this->call(PositionsTableSeeder::class);
         // $this->call(SalaryGradesTableSeeder::class);
+        // $this->call(DocumentTypesTableSeeder::class);
+        $this->call(DocumentSubTypesTableSeeder::class);
+        // $this->call(ActionsTableSeeder::class);
     }
 }

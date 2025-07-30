@@ -19,8 +19,21 @@ The project has successfully completed the dependency upgrade phase. The current
 *   **Modernized Newsfeed Page:** The newsfeed page (`home.blade.php`) has been updated with a modern, card-based design. This includes a modal for creating posts, like and comment functionality, and the use of user initials as profile picture placeholders for a cleaner interface.
 *   **Implemented Infinite Scroll:** The traditional pagination on the newsfeed has been replaced with an infinite scroll feature, allowing for a more seamless user experience.
 *   **Designed Document Tracking Page:** Created a modern, static design for the document tracking page based on the office's monitoring slip.
-*   **Updated Document Migration:** Aligned the `create_documents_table` migration with the new design by adding `note` and `document_sub_type_id` fields.
-*   **Created Reference Tables:** Created and migrated new tables for `document_status_types`, `document_types`, and `document_sub_types` to normalize the database structure.
+*   **Updated Document Migration:** Aligned the `create_documents_table` migration with the new design by adding `note` and `document_sub_type_id` fields, and removing the `status_type_id` field.
+*   **Created Reference Tables:** Created and migrated new tables for `document_status_types`, `document_types`, and `document_sub_types` to normalize the database structure. The `document_sub_types` table now includes a `document_type_id` to establish a relationship with the `document_types` table.
+*   **Created Actions Table:** Created and migrated a new `actions` table to store the different types of actions that can be logged against a document.
+*   **Enhanced Document Tracking Module:** Implemented a fully dynamic and feature-rich document tracking module. This includes a creation modal with integrated routing, a dynamic and color-coded table with status and location tracking, a detailed view modal with a QR code, an edit/action modal for processing pending documents, a functional search bar, and advanced filtering. The document tracking page now also displays both the date and time for all document-related timestamps.
+*   **Strengthened Security:**
+    *   **Input Sanitization:** Added `strip_tags` to the registration process to prevent the storage of malicious HTML.
+    *   **IP Address Resolution:** Configured the `TrustProxies` middleware to correctly capture user IP addresses behind a reverse proxy.
+    *   **XSS Prevention:** Verified that the user list page properly escapes output, mitigating the risk of XSS attacks.
+*   **Enhanced Document Tracking Module (Continued):**
+    *   **Dynamic Summary Cards:** Implemented dynamic summary cards with percentages.
+    *   **Personalized Document View:** The document list is now filtered based on the user's context.
+    *   **Corrected Status Logic:** The logic for the "Ongoing" status has been fixed.
+    *   **Bug Fixes:** Resolved a critical bug in the document update process.
+    *   **Printable View:** Added a feature to print a clean, A4-formatted Document Monitoring Slip.
+    *   **Custom Name Formatting:** Implemented a custom name format for signatures in the routing history.
 
 ## What Works
 
@@ -28,7 +41,12 @@ The project has successfully completed the dependency upgrade phase. The current
 *   The application is fully functional on Laravel 8 (pre-upgrade).
 *   The registration, login, forgot password, reset password, module-selector, CSS form, and newsfeed pages have been modernized or enhanced.
 *   The newsfeed now supports infinite scrolling.
-*   The document tracking page design is complete and the corresponding migrations have been created and run.
+*   The document tracking module is now fully functional with a dynamic table, creation and view modals, complex status/location logic, timestamped document dates, a functional search bar, and advanced filtering.
+*   The summary cards on the document tracking page are now dynamic and filtered.
+*   The printable view for the Document Monitoring Slip is fully functional.
+*   The `actions` table has been created and migrated.
+*   The application is now more secure against injection and XSS attacks.
+*   The auditing feature now correctly logs the user's public IP address.
 
 ## What's Left to Build
 
@@ -39,3 +57,4 @@ The project has successfully completed the dependency upgrade phase. The current
 ## Known Issues
 
 *   The `rappasoft/laravel-livewire-tables` package upgrade to v2.0 is a major change and is expected to cause significant breaking changes in all data tables.
+*   **Bootstrap 4 Legacy:** The core application layout (`b_app.blade.php`) is dependent on Bootstrap 4 via the AdminLTE theme. This creates a technical debt and a potential obstacle for future UI modernization efforts, as most new pages are being built with Bootstrap 5. A full migration has been deemed high-risk and deferred.

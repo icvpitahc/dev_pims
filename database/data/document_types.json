@@ -10,46 +10,46 @@
     },
     {
         "id": 3,
-        "document_type_name": "Budget"
+        "document_type_name": "Financial"
     },
     {
         "id": 4,
-        "document_type_name": "Cash Advance"
-    },
-    {
-        "id": 5,
-        "document_type_name": "Financial and Accounting"
-    },
-    {
-        "id": 6,
-        "document_type_name": "FOI Request"
-    },
-    {
-        "id": 7,
         "document_type_name": "Human Resource"
     },
     {
-        "id": 8,
+        "id": 5,
         "document_type_name": "Legal"
     },
     {
-        "id": 9,
+        "id": 6,
         "document_type_name": "Letter"
     },
     {
-        "id": 10,
+        "id": 7,
         "document_type_name": "Issuances"
     },
     {
+        "id": 8,
+        "document_type_name": "Standards and Accreditation"
+    },
+    {
+        "id": 9,
+        "document_type_name": "Other Documents"
+    },
+    {
+        "id": 10,
+        "document_type_name": "Research and Development"
+    },
+    {
         "id": 11,
-        "document_type_name": "Payment"
+        "document_type_name": "ISO Documents"
     },
     {
         "id": 12,
-        "document_type_name": "Payroll"
+        "document_type_name": "Social Advocacy and Training"
     },
     {
         "id": 13,
-        "document_type_name": "Standards and Accreditation"
+        "document_type_name": "Marketing and Business Development"
     }
 ]

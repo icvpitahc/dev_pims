@@ -2,327 +2,927 @@
 [
     {
         "id": 1,
-        "document_type_id": "1",
+        "document_type_id": 1,
         "document_sub_type_name": "Purchase Request"
     },
     {
         "id": 2,
-        "document_type_id": "1",
-        "document_sub_type_name": "Purchase Order"
-    },
-    {
-        "id": 3,
-        "document_type_id": "1",
+        "document_type_id": 1,
         "document_sub_type_name": "Request for Proposal"
     },
     {
-        "id": 4,
-        "document_type_id": "1",
+        "id": 3,
+        "document_type_id": 1,
         "document_sub_type_name": "Request for Quotation"
     },
     {
+        "id": 4,
+        "document_type_id": 1,
+        "document_sub_type_name": "Request for Expression of Interest"
+    },
+    {
         "id": 5,
-        "document_type_id": "1",
+        "document_type_id": 1,
         "document_sub_type_name": "Invitation to Bid"
     },
     {
         "id": 6,
-        "document_type_id": "1",
+        "document_type_id": 1,
         "document_sub_type_name": "Request for Expression of Interest"
     },
     {
         "id": 7,
-        "document_type_id": "1",
+        "document_type_id": 1,
         "document_sub_type_name": "Notice of Award"
     },
     {
         "id": 8,
-        "document_type_id": "1",
+        "document_type_id": 1,
         "document_sub_type_name": "Notice of Extension"
     },
     {
         "id": 9,
-        "document_type_id": "1",
-        "document_sub_type_name": "Bid Bulletin"
+        "document_type_id": 1,
+        "document_sub_type_name": "Bid Supplemental Bulletin"
     },
     {
         "id": 10,
-        "document_type_id": "1",
-        "document_sub_type_name": "Notice to Proceed"
+        "document_type_id": 1,
+        "document_sub_type_name": "Purchase Order"
     },
     {
         "id": 11,
-        "document_type_id": "1",
-        "document_sub_type_name": "BAC Resolution"
+        "document_type_id": 1,
+        "document_sub_type_name": "Notice to Proceed"
     },
     {
         "id": 12,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 1,
+        "document_sub_type_name": "BAC Resolution"
     },
     {
         "id": 13,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 1,
+        "document_sub_type_name": "Notice of Renewal"
     },
     {
         "id": 14,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 1,
+        "document_sub_type_name": "Project Procurement Management Plan"
     },
     {
         "id": 15,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 1,
+        "document_sub_type_name": "Annual Procurement Plan "
     },
     {
         "id": 16,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 1,
+        "document_sub_type_name": "Supplemental Project Procurement Management Plan"
     },
     {
         "id": 17,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 1,
+        "document_sub_type_name": "Agency Procurement Compliance and Performance Indicator Systems"
     },
     {
         "id": 18,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 1,
+        "document_sub_type_name": "Request for Reconsideration"
     },
     {
         "id": 19,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 1,
+        "document_sub_type_name": "Early Procurement Activities"
     },
     {
         "id": 20,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 1,
+        "document_sub_type_name": "Indicative Annual Procurement Plan "
     },
     {
         "id": 21,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 1,
+        "document_sub_type_name": "Annual Procurement Plan - Common-Use Supplies and Equipment"
     },
     {
         "id": 22,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 1,
+        "document_sub_type_name": "Supplemental Annual Procurement Plan - Non Common-Use Supplies and Equipment"
     },
     {
         "id": 23,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 1,
+        "document_sub_type_name": "Procurement Monitoring Report"
     },
     {
         "id": 24,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 1,
+        "document_sub_type_name": "Negotiation Checklist"
     },
     {
         "id": 25,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 1,
+        "document_sub_type_name": "TWG Evaluation"
     },
     {
         "id": 26,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 1,
+        "document_sub_type_name": "End-user Evaluation"
     },
     {
         "id": 27,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 2,
+        "document_sub_type_name": "Requisition and Issue Slips (RIS)"
     },
     {
         "id": 28,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 2,
+        "document_sub_type_name": "PS-DBM Agency Procurement Request"
     },
     {
         "id": 29,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 2,
+        "document_sub_type_name": "Monthly Inventory of Equipments/Supplies"
     },
     {
         "id": 30,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 2,
+        "document_sub_type_name": "Report of Supplies and Materials issued"
     },
     {
         "id": 31,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 2,
+        "document_sub_type_name": "Inventory Transfer Report"
     },
     {
         "id": 32,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 2,
+        "document_sub_type_name": "Property Acknowledgement Receipt"
     },
     {
         "id": 33,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 2,
+        "document_sub_type_name": "Report on the Physical Count of Property, Plant and Equipment (RCPPE)"
     },
     {
         "id": 34,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 2,
+        "document_sub_type_name": "Report on the Physical Count of Semi-Expendable Property (RPCSP)"
     },
     {
         "id": 35,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 2,
+        "document_sub_type_name": "Report on the Physical Count of Inventories (RCPI)"
     },
     {
         "id": 36,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 2,
+        "document_sub_type_name": "Inspection and Acceptance Report"
     },
     {
         "id": 37,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Disbursement Voucher (DV)"
     },
     {
         "id": 38,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Petty Cash Voucher (PCV)"
     },
     {
         "id": 39,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Liquidation Report"
     },
     {
         "id": 40,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Checks and ACIC"
     },
     {
         "id": 41,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Budget Utilization Request and Status (BURS)"
     },
     {
         "id": 42,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Sub-allotment Advice (SAA)"
     },
     {
         "id": 43,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Budget Proposal (BP)"
     },
     {
         "id": 44,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Corporate Operating Budget (COB)"
     },
     {
         "id": 45,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Statement of Allotment, Obligations, Utilization and Balances (SAOUB)"
     },
     {
         "id": 46,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Statement of Budget Utilization (SBU)"
     },
     {
         "id": 47,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Budget Execution Documents (BEDs)"
     },
     {
         "id": 48,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Modification Advice Form (MAF)"
     },
     {
         "id": 49,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Budget Preparation (BP) Form"
     },
     {
         "id": 50,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Forward Estimates (FEs)"
     },
     {
         "id": 51,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Certificate of Budget Inclusion (CBI)"
     },
     {
         "id": 52,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Certificate of Availability of Funds (CAF)"
     },
     {
         "id": 53,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Financial Accountability Report (FAR)"
     },
     {
         "id": 54,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Budget Issuances"
     },
     {
         "id": 55,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Budget Estimates"
     },
     {
         "id": 56,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Work and Financial Plan (WFP)"
     },
     {
         "id": 57,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "Financial Statements"
     },
     {
         "id": 58,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 3,
+        "document_sub_type_name": "DOF GLAM Report"
     },
     {
         "id": 59,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 4,
+        "document_sub_type_name": "Application for Employment"
     },
     {
         "id": 60,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 4,
+        "document_sub_type_name": "Application for Leave"
     },
     {
         "id": 61,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 4,
+        "document_sub_type_name": "Application for Resignation"
     },
     {
         "id": 62,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 4,
+        "document_sub_type_name": "Application for Retirement"
     },
     {
         "id": 63,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 4,
+        "document_sub_type_name": "Appointment Letter/Documents"
     },
     {
         "id": 64,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 4,
+        "document_sub_type_name": "Attendance Monitoring Sheet"
     },
     {
         "id": 65,
-        "document_type_id": "",
-        "document_sub_type_name": ""
+        "document_type_id": 4,
+        "document_sub_type_name": "Certification of Appearance/Attendance"
+    },
+    {
+        "id": 66,
+        "document_type_id": 4,
+        "document_sub_type_name": "Certification of Clearance"
+    },
+    {
+        "id": 67,
+        "document_type_id": 4,
+        "document_sub_type_name": "Certification of Employment"
+    },
+    {
+        "id": 68,
+        "document_type_id": 4,
+        "document_sub_type_name": "Certification of No Administrative Case"
+    },
+    {
+        "id": 69,
+        "document_type_id": 4,
+        "document_sub_type_name": "Certification of No Pending Retirement"
+    },
+    {
+        "id": 70,
+        "document_type_id": 4,
+        "document_sub_type_name": "Daily Time Record"
+    },
+    {
+        "id": 71,
+        "document_type_id": 4,
+        "document_sub_type_name": "Employee Interview Record"
+    },
+    {
+        "id": 72,
+        "document_type_id": 4,
+        "document_sub_type_name": "Monthly Report of Attendance"
+    },
+    {
+        "id": 73,
+        "document_type_id": 4,
+        "document_sub_type_name": "Personal Data Sheet/Work Experience Sheet"
+    },
+    {
+        "id": 74,
+        "document_type_id": 4,
+        "document_sub_type_name": "Personnel Folder (201 File)"
+    },
+    {
+        "id": 75,
+        "document_type_id": 4,
+        "document_sub_type_name": "Plantilla of Personnel"
+    },
+    {
+        "id": 76,
+        "document_type_id": 4,
+        "document_sub_type_name": "Position Allocation List"
+    },
+    {
+        "id": 77,
+        "document_type_id": 4,
+        "document_sub_type_name": "Post-Travel/Activity/Training Report"
+    },
+    {
+        "id": 78,
+        "document_type_id": 4,
+        "document_sub_type_name": "Examination/Evaluation/Interview Sheets/Background Investigation"
+    },
+    {
+        "id": 79,
+        "document_type_id": 4,
+        "document_sub_type_name": "Statement of Assets, Liabilities, and Net Worth Form"
+    },
+    {
+        "id": 80,
+        "document_type_id": 4,
+        "document_sub_type_name": "Service Records"
+    },
+    {
+        "id": 81,
+        "document_type_id": 4,
+        "document_sub_type_name": "Organizational Structure/Staffing Pattern"
+    },
+    {
+        "id": 82,
+        "document_type_id": 4,
+        "document_sub_type_name": "HRMPSB Resolution"
+    },
+    {
+        "id": 83,
+        "document_type_id": 4,
+        "document_sub_type_name": "Comparative Assessment Report"
+    },
+    {
+        "id": 84,
+        "document_type_id": 4,
+        "document_sub_type_name": "Application for Authority to Travel"
+    },
+    {
+        "id": 85,
+        "document_type_id": 4,
+        "document_sub_type_name": "Letter of Acceptance"
+    },
+    {
+        "id": 86,
+        "document_type_id": 4,
+        "document_sub_type_name": "CS Form 9 - Request for Publication of Vacant Position/s"
+    },
+    {
+        "id": 87,
+        "document_type_id": 4,
+        "document_sub_type_name": "Certificate of Training"
+    },
+    {
+        "id": 88,
+        "document_type_id": 4,
+        "document_sub_type_name": "Accomplishment Report/s"
+    },
+    {
+        "id": 89,
+        "document_type_id": 4,
+        "document_sub_type_name": "Application for Loan"
+    },
+    {
+        "id": 90,
+        "document_type_id": 4,
+        "document_sub_type_name": "Learning and Development Activity Proposal"
+    },
+    {
+        "id": 91,
+        "document_type_id": 4,
+        "document_sub_type_name": "GSIS/SSS/PAG-Ibig Forms"
+    },
+    {
+        "id": 92,
+        "document_type_id": 4,
+        "document_sub_type_name": "Payroll"
+    },
+    {
+        "id": 93,
+        "document_type_id": 4,
+        "document_sub_type_name": "Time-off/Overtime"
+    },
+    {
+        "id": 94,
+        "document_type_id": 4,
+        "document_sub_type_name": "Performance Commitment and Review"
+    },
+    {
+        "id": 95,
+        "document_type_id": 5,
+        "document_sub_type_name": "Administrative Case"
+    },
+    {
+        "id": 96,
+        "document_type_id": 5,
+        "document_sub_type_name": "Affidavits"
+    },
+    {
+        "id": 97,
+        "document_type_id": 5,
+        "document_sub_type_name": "Article / By-laws"
+    },
+    {
+        "id": 98,
+        "document_type_id": 5,
+        "document_sub_type_name": "Complaints / Protest"
+    },
+    {
+        "id": 99,
+        "document_type_id": 5,
+        "document_sub_type_name": "Contracts"
+    },
+    {
+        "id": 100,
+        "document_type_id": 5,
+        "document_sub_type_name": "Decision"
+    },
+    {
+        "id": 101,
+        "document_type_id": 5,
+        "document_sub_type_name": "Deed of Sales"
+    },
+    {
+        "id": 102,
+        "document_type_id": 5,
+        "document_sub_type_name": "Deed of Donation"
+    },
+    {
+        "id": 103,
+        "document_type_id": 5,
+        "document_sub_type_name": "Legal Opinion"
+    },
+    {
+        "id": 104,
+        "document_type_id": 5,
+        "document_sub_type_name": "Petitions"
+    },
+    {
+        "id": 105,
+        "document_type_id": 5,
+        "document_sub_type_name": "Special Power of Attorney"
+    },
+    {
+        "id": 106,
+        "document_type_id": 5,
+        "document_sub_type_name": "Subpoenas"
+    },
+    {
+        "id": 107,
+        "document_type_id": 5,
+        "document_sub_type_name": "Terms of Reference / Concept Note"
+    },
+    {
+        "id": 108,
+        "document_type_id": 5,
+        "document_sub_type_name": "Contract of Service"
+    },
+    {
+        "id": 109,
+        "document_type_id": 5,
+        "document_sub_type_name": "Non-Disclosure Agreement (NDA)"
+    },
+    {
+        "id": 110,
+        "document_type_id": 5,
+        "document_sub_type_name": "Contract Service Agreement"
+    },
+    {
+        "id": 111,
+        "document_type_id": 6,
+        "document_sub_type_name": "Acknowledgement / Response"
+    },
+    {
+        "id": 112,
+        "document_type_id": 6,
+        "document_sub_type_name": "Endorsement"
+    },
+    {
+        "id": 113,
+        "document_type_id": 6,
+        "document_sub_type_name": "Inquiry / Request"
+    },
+    {
+        "id": 114,
+        "document_type_id": 6,
+        "document_sub_type_name": "Invitation"
+    },
+    {
+        "id": 115,
+        "document_type_id": 6,
+        "document_sub_type_name": "Memorandum "
+    },
+    {
+        "id": 116,
+        "document_type_id": 6,
+        "document_sub_type_name": "Letter (Proposal) "
+    },
+    {
+        "id": 117,
+        "document_type_id": 6,
+        "document_sub_type_name": "Report / Complaint"
+    },
+    {
+        "id": 118,
+        "document_type_id": 6,
+        "document_sub_type_name": "Protest"
+    },
+    {
+        "id": 119,
+        "document_type_id": 6,
+        "document_sub_type_name": "Recommendations / Referrals"
+    },
+    {
+        "id": 120,
+        "document_type_id": 7,
+        "document_sub_type_name": "Administrative Order"
+    },
+    {
+        "id": 121,
+        "document_type_id": 7,
+        "document_sub_type_name": "Implementing Rules and Regulation"
+    },
+    {
+        "id": 122,
+        "document_type_id": 7,
+        "document_sub_type_name": "Memorandum Circular"
+    },
+    {
+        "id": 123,
+        "document_type_id": 7,
+        "document_sub_type_name": "Memorandum of Agreement"
+    },
+    {
+        "id": 124,
+        "document_type_id": 7,
+        "document_sub_type_name": "Memorandum of Understanding"
+    },
+    {
+        "id": 125,
+        "document_type_id": 7,
+        "document_sub_type_name": "Department Circular"
+    },
+    {
+        "id": 126,
+        "document_type_id": 7,
+        "document_sub_type_name": "Department Memorandum"
+    },
+    {
+        "id": 127,
+        "document_type_id": 7,
+        "document_sub_type_name": "Department Order"
+    },
+    {
+        "id": 128,
+        "document_type_id": 7,
+        "document_sub_type_name": "Department Personnel Order"
+    },
+    {
+        "id": 129,
+        "document_type_id": 7,
+        "document_sub_type_name": "Executive Order"
+    },
+    {
+        "id": 130,
+        "document_type_id": 7,
+        "document_sub_type_name": "Republic Act"
+    },
+    {
+        "id": 131,
+        "document_type_id": 7,
+        "document_sub_type_name": "Joint Administrative Order"
+    },
+    {
+        "id": 132,
+        "document_type_id": 7,
+        "document_sub_type_name": "Joint Memorandum Circular"
+    },
+    {
+        "id": 133,
+        "document_type_id": 7,
+        "document_sub_type_name": "Joint Circular"
+    },
+    {
+        "id": 134,
+        "document_type_id": 7,
+        "document_sub_type_name": "PITAHC Order"
+    },
+    {
+        "id": 135,
+        "document_type_id": 7,
+        "document_sub_type_name": "PITAHC Memorandum"
+    },
+    {
+        "id": 136,
+        "document_type_id": 7,
+        "document_sub_type_name": "Guidelines"
+    },
+    {
+        "id": 137,
+        "document_type_id": 8,
+        "document_sub_type_name": "Application for Certification"
+    },
+    {
+        "id": 138,
+        "document_type_id": 8,
+        "document_sub_type_name": "Application for Accreditation"
+    },
+    {
+        "id": 139,
+        "document_type_id": 8,
+        "document_sub_type_name": "Renewal of Certification"
+    },
+    {
+        "id": 140,
+        "document_type_id": 8,
+        "document_sub_type_name": "Renewal of Accreditation"
+    },
+    {
+        "id": 141,
+        "document_type_id": 8,
+        "document_sub_type_name": "National Certification Committee Meeting"
+    },
+    {
+        "id": 142,
+        "document_type_id": 8,
+        "document_sub_type_name": "Competency Standard Formulation"
+    },
+    {
+        "id": 143,
+        "document_type_id": 8,
+        "document_sub_type_name": "Development of Guidelines"
+    },
+    {
+        "id": 144,
+        "document_type_id": 8,
+        "document_sub_type_name": "Monitoring/Inspection"
+    },
+    {
+        "id": 145,
+        "document_type_id": 8,
+        "document_sub_type_name": "TCIM Mission"
+    },
+    {
+        "id": 146,
+        "document_type_id": 9,
+        "document_sub_type_name": "Internal Advisory"
+    },
+    {
+        "id": 147,
+        "document_type_id": 9,
+        "document_sub_type_name": "Itinerary of Travel "
+    },
+    {
+        "id": 148,
+        "document_type_id": 9,
+        "document_sub_type_name": "Minutes of the Meeting "
+    },
+    {
+        "id": 149,
+        "document_type_id": 9,
+        "document_sub_type_name": "Notice of Meeting "
+    },
+    {
+        "id": 150,
+        "document_type_id": 9,
+        "document_sub_type_name": "Activity proposal"
+    },
+    {
+        "id": 151,
+        "document_type_id": 9,
+        "document_sub_type_name": "Briefer (Activity, etc)"
+    },
+    {
+        "id": 152,
+        "document_type_id": 9,
+        "document_sub_type_name": "Report (Activity , etc)"
+    },
+    {
+        "id": 153,
+        "document_type_id": 9,
+        "document_sub_type_name": "eFOI Request"
+    },
+    {
+        "id": 154,
+        "document_type_id": 9,
+        "document_sub_type_name": "Standard Request (Hard copy)"
+    },
+    {
+        "id": 155,
+        "document_type_id": 9,
+        "document_sub_type_name": "Others, specify"
+    },
+    {
+        "id": 156,
+        "document_type_id": 10,
+        "document_sub_type_name": "Research Funding Agreement (RFA)"
+    },
+    {
+        "id": 157,
+        "document_type_id": 10,
+        "document_sub_type_name": "Recommending Approval (RA) for Funding Assistance with LIB"
+    },
+    {
+        "id": 158,
+        "document_type_id": 10,
+        "document_sub_type_name": "Certification: Acceptance of Inception Report"
+    },
+    {
+        "id": 159,
+        "document_type_id": 10,
+        "document_sub_type_name": "Certification: Project Completion"
+    },
+    {
+        "id": 160,
+        "document_type_id": 10,
+        "document_sub_type_name": "Request for Extension / Realignment"
+    },
+    {
+        "id": 161,
+        "document_type_id": 10,
+        "document_sub_type_name": "Request - R&D Dissemination Grant"
+    },
+    {
+        "id": 162,
+        "document_type_id": 10,
+        "document_sub_type_name": "Technical Reviewer-Invitation Conforme"
+    },
+    {
+        "id": 163,
+        "document_type_id": 10,
+        "document_sub_type_name": "Project Financial Reports and Liquidation Documents"
+    },
+    {
+        "id": 164,
+        "document_type_id": 10,
+        "document_sub_type_name": "Request for Information"
+    },
+    {
+        "id": 165,
+        "document_type_id": 11,
+        "document_sub_type_name": "Quality Objectives & Plan"
+    },
+    {
+        "id": 166,
+        "document_type_id": 11,
+        "document_sub_type_name": "Quality Objectives Monitoring"
+    },
+    {
+        "id": 167,
+        "document_type_id": 11,
+        "document_sub_type_name": "Risk Registry"
+    },
+    {
+        "id": 168,
+        "document_type_id": 11,
+        "document_sub_type_name": "Quality Manual"
+    },
+    {
+        "id": 169,
+        "document_type_id": 11,
+        "document_sub_type_name": "Document Control Form"
+    },
+    {
+        "id": 170,
+        "document_type_id": 11,
+        "document_sub_type_name": "Procedure Manual"
+    },
+    {
+        "id": 171,
+        "document_type_id": 11,
+        "document_sub_type_name": "Masterlist of Documented Information"
+    },
+    {
+        "id": 172,
+        "document_type_id": 12,
+        "document_sub_type_name": "Community-Based Orientation Report"
+    },
+    {
+        "id": 173,
+        "document_type_id": 12,
+        "document_sub_type_name": "Community-Based Orientation Mapping Report"
+    },
+    {
+        "id": 174,
+        "document_type_id": 12,
+        "document_sub_type_name": "Community-Based Orientation Accomplishment Report"
+    },
+    {
+        "id": 175,
+        "document_type_id": 12,
+        "document_sub_type_name": "Training (Request/ Response)"
+    },
+    {
+        "id": 176,
+        "document_type_id": 12,
+        "document_sub_type_name": "CBO (Request/ Response)"
+    },
+    {
+        "id": 177,
+        "document_type_id": 12,
+        "document_sub_type_name": "Certificates of Completion (PITAHC Training)"
+    },
+    {
+        "id": 178,
+        "document_type_id": 12,
+        "document_sub_type_name": "Certificate of Attendance (PITAHC Activity)"
+    },
+    {
+        "id": 179,
+        "document_type_id": 12,
+        "document_sub_type_name": "Certificate of Appreciation (Speakers, partners, etc) "
+    },
+    {
+        "id": 180,
+        "document_type_id": 12,
+        "document_sub_type_name": "Public Advisory"
+    },
+    {
+        "id": 181,
+        "document_type_id": 12,
+        "document_sub_type_name": "Materials for Printing (Brochure, flyers, tarpaulins, etc)"
+    },
+    {
+        "id": 182,
+        "document_type_id": 12,
+        "document_sub_type_name": "Materials for Posting (Social media Cards)"
+    },
+    {
+        "id": 183,
+        "document_type_id": 13,
+        "document_sub_type_name": "Price Proposal/Quotation Form"
+    },
+    {
+        "id": 184,
+        "document_type_id": 13,
+        "document_sub_type_name": "Monthly Sales Report"
+    },
+    {
+        "id": 185,
+        "document_type_id": 13,
+        "document_sub_type_name": "Dormitory Registration Form"
     }
 ]

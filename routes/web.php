@@ -18,6 +18,7 @@ use App\Http\Livewire\Pages\Css\CssForm;
 use App\Http\Livewire\Pages\Admin\ListUsers;
 use App\Http\Livewire\Pages\Admin\Settings;
 use App\Http\Livewire\Pages\Admin\References;
+use App\Http\Controllers\DocumentController;
 use App\Http\Livewire\Pages\DocumentTracking\Listdocuments;
 use App\Http\Livewire\Pages\IctRequest\ListIctRequests;
 use App\Http\Livewire\Pages\Issuance\ListIssuances;
@@ -55,6 +56,7 @@ Route::group(['middleware' => ['auth', 'verified', 'activated.account']], functi
     });
 
     Route::get('/pages/document-tracking/list-documents', ListDocuments::class)->name('list-documents');
+    Route::get('/documents/{document}/print', [DocumentController::class, 'print'])->name('documents.print');
     Route::get('/pages/ict-request/list-ict-requests', ListIctRequests::class)->name('list-ict-requests');
     Route::get('/pages/issuance/list-issuances/', ListIssuances::class)->name('list-issuances');
 });

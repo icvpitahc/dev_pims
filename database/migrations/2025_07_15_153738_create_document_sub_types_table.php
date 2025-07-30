@@ -15,6 +15,7 @@ class CreateDocumentSubTypesTable extends Migration
     {
         Schema::create('document_sub_types', function (Blueprint $table) {
             $table->id();
+            $table->integer('document_type_id');
             $table->string('document_sub_type_name');
             $table->timestamps();
         });

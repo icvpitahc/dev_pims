@@ -141,7 +141,7 @@
       "hideMethod": "fadeOut"
     }
     window.addEventListener('success-message', event=> {
-          $('#add-ict-request-form, #start-request-form, #start-request-form, #resolve-request-form, #close-request-form, #delete-form, #cancel-ict-request-form').modal('hide');
+          $('#add-ict-request-form, #start-request-form, #start-request-form, #resolve-request-form, #close-request-form, #delete-form, #cancel-ict-request-form, #createSlipModal').modal('hide');
           toastr.success(event.detail.message, 'Success!');
     })
 
@@ -329,7 +329,7 @@
         $('#postModal').modal('hide');
     });
 </script>
-@stack('page_scripts')
+@stack('scripts')
 <livewire:scripts />
 </body>
 

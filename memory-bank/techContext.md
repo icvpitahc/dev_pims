@@ -7,7 +7,8 @@ This document outlines the technology stack and key dependencies of the Personne
 *   **PHP:** ^8.0
 *   **Laravel Framework:** ^9.0
 *   **Livewire:** ^2.10
-*   **Bootstrap 5:** Used for the modernized user interface.
+*   **Bootstrap 5:** Used for standalone, modernized pages (e.g., authentication, newsfeed).
+*   **Bootstrap 4:** Used by the core AdminLTE theme, which provides the main application layout.
 *   **Custom CSS:** A custom stylesheet (`public/css/login.css`) is used for the modernized authentication pages.
 
 ## Key Dependencies

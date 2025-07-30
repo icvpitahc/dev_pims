@@ -16,10 +16,10 @@ class CreateDocumentLogsTable extends Migration
         Schema::create('document_logs', function (Blueprint $table) {
             $table->id();
             $table->integer('document_id')->nullable();
-            $table->integer('status_type_id')->nullable();
-            $table->integer('action_id')->nullable(); // Forward / Complete
-            $table->integer('from_office_id')->nullable();
-            $table->integer('to_office_id')->nullable();
+            $table->integer('status_type_id')->nullable(); // Active / Inactive
+            $table->integer('action_id')->nullable(); // Forward / Discard / Complete
+            $table->integer('from_division_id')->nullable();
+            $table->integer('to_division_id')->nullable();
             $table->string('remarks')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
