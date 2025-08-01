@@ -29,7 +29,9 @@ class CreateIctRequestsTable extends Migration
             $table->dateTime('cancelled_datetime')->nullable();
             $table->dateTime('acknowledged_datetime')->nullable();      
             $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();    
+            $table->integer('updated_by')->nullable(); 
+            $table->integer('deleted_by')->nullable();
+            $table->datetime('deleted_at')->nullable();   
             $table->timestamps();
         });
     }

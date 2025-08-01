@@ -47,6 +47,8 @@ return new class extends Migration
             $table->text('outcome_remarks')->nullable();
             $table->integer('overall_rate_id')->nullable();
             $table->text('overall_remarks')->nullable();
+            $table->integer('deleted_by')->nullable();
+            $table->datetime('deleted_at')->nullable();
             $table->timestamps();
         });
     }

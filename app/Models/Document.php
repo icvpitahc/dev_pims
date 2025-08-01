@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Document extends Model
+class Document extends Model implements Auditable
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes, \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'document_reference_code',
@@ -18,6 +20,7 @@ class Document extends Model
         'note',
         'division_id',
         'created_by',
+        'deleted_by',
     ];
 
     public function document_type()
@@ -62,13 +65,20 @@ class Document extends Model
 
     public function getCurrentLocationAttribute()
     {
-        return $this->latestActiveLog->toDivision->division_name ?? 'N/A';
+        $log = $this->latestActiveLog ?? $this->latestLog;
+
+        if ($log) {
+            if ($log->toDivision) {
+                return $log->toDivision->division_name;
+            }
+            return $log->fromDivision->division_name;
+        }
+
+        return 'N/A';
     }
 
     public function getStatusAttribute()
     {
-        $user = auth()->user();
-
         if ($this->latestLog) {
             if ($this->latestLog->action_id == 3) {
                 return 'Completed';
@@ -78,15 +88,57 @@ class Document extends Model
                 return 'Discarded';
             }
 
-            if ($this->latestActiveLog && $this->latestActiveLog->to_division_id == $user->division_id) {
-                return 'Pending';
+            if (auth()->check()) {
+                $user = auth()->user();
+                if ($this->latestActiveLog && $this->latestActiveLog->to_division_id == $user->division_id) {
+                    return 'Pending';
+                }
             }
         }
 
-        if ($this->created_by == $user->id || $this->division_id == $user->division_id) {
-            return 'Ongoing';
+        // If none of the above, it's Ongoing
+        return 'Ongoing';
+    }
+
+    public function isPendingReception()
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return false;
         }
 
-        return 'N/A';
+        $activeLog = $this->latestActiveLog;
+
+        return $activeLog &&
+               $activeLog->to_division_id == $user->division_id &&
+               is_null($activeLog->received_date);
+    }
+
+    public function isReadyForAction()
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return false;
+        }
+
+        $activeLog = $this->latestActiveLog;
+
+        return $activeLog &&
+               $activeLog->from_division_id == $user->division_id &&
+               is_null($activeLog->action_id);
+    }
+
+    protected static function booted()
+    {
+        static::deleting(function ($document) {
+            if ($document->isForceDeleting()) {
+                $document->logs()->forceDelete();
+            } else {
+                $document->logs->each(function ($log) use ($document) {
+                    $log->update(['deleted_by' => $document->deleted_by]);
+                    $log->delete();
+                });
+            }
+        });
     }
 }

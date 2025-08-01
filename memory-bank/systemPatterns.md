@@ -11,6 +11,8 @@ The application follows a standard Laravel monolithic architecture. The frontend
 *   **Livewire Components:** The majority of the user interface is built using Livewire components. This pattern encapsulates the view and its corresponding logic within a single PHP class, simplifying state management and user interactions.
 *   **Repository Pattern (Implied):** While not explicitly defined, the use of Laravel's Eloquent ORM for database interactions follows the principles of the repository pattern, abstracting data access from the application's business logic.
 *   **Data Tables:** The `rappasoft/laravel-livewire-tables` package is used extensively for displaying and managing tabular data. This is a critical component that will require significant attention during the upgrade.
+*   **Cascading Soft Deletes:** For critical records like documents, a soft delete strategy is implemented. When a parent record (e.g., `Document`) is soft-deleted, a model event listener triggers the soft deletion of all its children (e.g., `DocumentLog`), ensuring data consistency.
+*   **Auditing:** Key models like `Document` and `DocumentLog` implement the `owen-it/laravel-auditing` package. This automatically creates a detailed audit trail for all create, update, and delete operations.
 
 ## Component Relationships
 

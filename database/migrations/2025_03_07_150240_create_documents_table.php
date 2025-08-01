@@ -24,6 +24,8 @@ class CreateDocumentsTable extends Migration
             $table->integer('division_id')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
+            $table->datetime('deleted_at')->nullable();
             $table->timestamps();
         });
     }

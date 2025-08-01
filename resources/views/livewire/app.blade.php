@@ -122,212 +122,138 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
 @yield('third_party_scripts')
 <script>
-  $(document).ready(function() {
-    toastr.options = {
-      "closeButton": false,
-      "debug": false,
-      "newestOnTop": false,
-      "progressBar": true,
-      "positionClass": "toast-bottom-right",
-      "preventDuplicates": false,
-      "onclick": null,
-      "showDuration": "1000",
-      "hideDuration": "1000",
-      "timeOut": "5000",
-      "extendedTimeOut": "1000",
-      "showEasing": "swing",
-      "hideEasing": "linear",
-      "showMethod": "fadeIn",
-      "hideMethod": "fadeOut"
+    $(document).ready(function() {
+        // Toastr Options
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "1000",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        // Global Toastr Listeners
+        window.addEventListener('success-message', event => {
+            $('#add-ict-request-form, #start-request-form, #resolve-request-form, #close-request-form, #delete-form, #cancel-ict-request-form, #createSlipModal, #receiveDocumentModal, #deleteDocumentModal').modal('hide');
+            toastr.success(event.detail.message, 'Success!');
+        });
+
+        window.addEventListener('warning-message', event => {
+            $('#add-ict-request-form, #start-request-form, #resolve-request-form, #close-request-form, #delete-form, #cancel-ict-request-form, #receiveDocumentModal, #deleteDocumentModal').modal('hide');
+            toastr.warning(event.detail.message, 'Warning!');
+        });
+
+        window.addEventListener('error-message', event => {
+            $('#add-ict-request-form, #start-request-form, #resolve-request-form, #close-request-form, #delete-form, #cancel-ict-request-form, #receiveDocumentModal, #deleteDocumentModal').modal('hide');
+            toastr.error(event.detail.message, 'Notification!');
+        });
+
+        // Modal Listeners
+        const modals = [
+            'add-ict-request-form', 'start-request-form', 'resolve-request-form',
+            'close-request-form', 'cancel-ict-request-form', 'delete-form',
+            'postModal'
+        ];
+
+        modals.forEach(id => {
+            window.addEventListener(`hide-${id}`, () => $(`#${id}`).modal('hide'));
+            window.addEventListener(`show-${id}`, () => {
+                $(`#${id}`).modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            });
+        });
+        
+        // Special Modal cases from other files
+        window.addEventListener('openPostModal', () => $('#postModal').modal('show'));
+        window.addEventListener('closePostModal', () => $('#postModal').modal('hide'));
+    });
+
+    // Functions defined in global scope
+    function calculatePercent(numerator, denominator, percent) {
+        $("#" + numerator + ", #" + denominator).keyup(function() {
+            let myStr = $("#" + numerator).val();
+            let myStr2 = $("#" + denominator).val();
+            let myStr3 = (Number(myStr) / Number(myStr2)) * 100;
+            $("#" + percent).val(myStr3.toFixed(2));
+        });
     }
-    window.addEventListener('success-message', event=> {
-          $('#add-ict-request-form, #start-request-form, #start-request-form, #resolve-request-form, #close-request-form, #delete-form, #cancel-ict-request-form, #createSlipModal').modal('hide');
-          toastr.success(event.detail.message, 'Success!');
-    })
 
-    window.addEventListener('warning-message', event=> {
-          $('#add-ict-request-form, #start-request-form, #start-request-form, #resolve-request-form, #close-request-form, #delete-form, #cancel-ict-request-form').modal('hide');
-          toastr.warning(event.detail.message, 'Warning!');
-    })
+    function fnExcelReport(tableID) {
+        var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+        var textRange;
+        var j = 0;
+        var tab = document.getElementById(tableID); // id of table
 
-    window.addEventListener('error-message', event=> {
-          $('#add-ict-request-form, #start-request-form, #start-request-form, #resolve-request-form, #close-request-form, #delete-form, #cancel-ict-request-form').modal('hide');
-          toastr.error(event.detail.message, 'Notification!');
-    })
-    
-  });
+        for (j = 0; j < tab.rows.length; j++) {
+            tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+        }
 
-  $(document).ready(function() {
-    window.addEventListener('hide-add-ict-request-form', event=> {
-      $('#add-ict-request-form').modal('hide');
-    })
-  });
+        tab_text = tab_text + "</table>";
+        tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, ""); //remove if u want links in your table
+        tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+        tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
 
-  window.addEventListener('show-add-ict-request-form', event=> {
-    $('#add-ict-request-form').modal({
-        backdrop: 'static',
-        keyboard: false
-      });   
-  });
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
 
-  $(document).ready(function() {
-    window.addEventListener('hide-start-request-form', event=> {
-      $('#start-request-form').modal('hide');
-    })
-  });
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer
+        {
+            txtArea1.document.open("txt/html", "replace");
+            txtArea1.document.write(tab_text);
+            txtArea1.document.close();
+            txtArea1.focus();
+            sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+        } else //other browser not tested on IE 11
+            sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
 
-  window.addEventListener('show-start-request-form', event=> {
-    $('#start-request-form').modal({
-        backdrop: 'static',
-        keyboard: false
-      });   
-  });
-
-  $(document).ready(function() {
-    window.addEventListener('hide-resolve-request-form', event=> {
-      $('#resolve-request-form').modal('hide');
-    })
-  });
-
-  window.addEventListener('show-resolve-request-form', event=> {
-    $('#resolve-request-form').modal({
-        backdrop: 'static',
-        keyboard: false
-      });   
-  });
-
-  $(document).ready(function() {
-    window.addEventListener('hide-close-request-form', event=> {
-      $('#close-request-form').modal('hide');
-    })
-  });
-
-  window.addEventListener('show-close-request-form', event=> {
-    $('#close-request-form').modal({
-        backdrop: 'static',
-        keyboard: false
-      });   
-  });
-
-  $(document).ready(function() {
-    window.addEventListener('hide-cancel-ict-request-form', event=> {
-      $('#cancel-ict-request-form').modal('hide');
-    })
-  });
-
-  window.addEventListener('show-cancel-ict-request-form', event=> {
-    $('#cancel-ict-request-form').modal({
-        backdrop: 'static',
-        keyboard: false
-      });   
-  });
-
-  $(document).ready(function() {
-    window.addEventListener('hide-delete-form', event=> {
-      $('#delete-form').modal('hide');
-    })
-  });
-
-  window.addEventListener('show-delete-form', event=> {
-    $('#delete-form').modal({
-        backdrop: 'static',
-        keyboard: false
-      });   
-  });
-  
-  $(window).on('load', function() {
-        $('#noAccessModal').modal({
-        backdrop: 'static',
-        keyboard: false
-      });    
-  }); 
-
-  $(window).on('load', function() {
-        $('#noAdminAccessModal').modal({
-        backdrop: 'static',
-        keyboard: false
-      });    
-  }); 
-
-  function calculatePercent(numerator, denominator, percent){
-      $("#"+numerator+", #"+denominator+"").keyup(function () {
-      myStr = $("#"+numerator).val();
-      myStr2 = $("#"+denominator).val();
-      myStr3 = (Number(myStr) / Number(myStr2))*100;
-      $("#"+percent).val(myStr3.toFixed(2));
-    });
-  }
-
-  function fnExcelReport(tableID)
-  {
-      var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
-      var textRange; var j=0;
-      tab = document.getElementById(tableID); // id of table
-
-      for(j = 0 ; j < tab.rows.length ; j++) 
-      {     
-          tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
-          //tab_text=tab_text+"</tr>";
-      }
-
-      tab_text=tab_text+"</table>";
-      tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
-      tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
-      tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
-
-      var ua = window.navigator.userAgent;
-      var msie = ua.indexOf("MSIE "); 
-
-      if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
-      {
-          txtArea1.document.open("txt/html","replace");
-          txtArea1.document.write(tab_text);
-          txtArea1.document.close();
-          txtArea1.focus(); 
-          sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
-      }  
-      else                 //other browser not tested on IE 11
-          sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
-
-      return (sa);
-  }
-
-  function selectElementContents(el) {
-    var body = document.body,
-      range, sel;
-    if (document.createRange && window.getSelection) {
-      range = document.createRange();
-      sel = window.getSelection();
-      sel.removeAllRanges();
-      range.selectNodeContents(el);
-      sel.addRange(range);
+        return (sa);
     }
-    document.execCommand("Copy");
-  }
 
-  function download(id) {
-    const imageLink = document.createElement('a')
-    const canvas = document.getElementById(id);
-    imageLink.download = 'canvas.png';
-    imageLink.href = canvas.toDataURL('image/png', 1);
-    imageLink.click();
-  }
+    function selectElementContents(el) {
+        var body = document.body,
+            range, sel;
+        if (document.createRange && window.getSelection) {
+            range = document.createRange();
+            sel = window.getSelection();
+            sel.removeAllRanges();
+            try {
+                range.selectNodeContents(el);
+                sel.addRange(range);
+            } catch (e) {
+                range.selectNode(el);
+                sel.addRange(range);
+            }
+        }
+        document.execCommand("Copy");
+    }
 
-  function printDiv(el){                     
-	var restorepage = document.body.innerHTML;
-	var printcontent = document.getElementById(el).innerHTML;
-	document.body.innerHTML = printcontent;
-	window.print();
-	document.body.innerHTML = restorepage;
-}  
+    function download(id) {
+        const imageLink = document.createElement('a');
+        const canvas = document.getElementById(id);
+        imageLink.download = 'canvas.png';
+        imageLink.href = canvas.toDataURL('image/png', 1);
+        imageLink.click();
+    }
 
-    window.addEventListener('openPostModal', event => {
-        $('#postModal').modal('show');
-    });
-
-    window.addEventListener('closePostModal', event => {
-        $('#postModal').modal('hide');
-    });
+    function printDiv(el) {
+        var restorepage = document.body.innerHTML;
+        var printcontent = document.getElementById(el).innerHTML;
+        document.body.innerHTML = printcontent;
+        window.print();
+        document.body.innerHTML = restorepage;
+    }
 </script>
 @stack('scripts')
 <livewire:scripts />

@@ -34,6 +34,12 @@ The project has successfully completed the dependency upgrade phase. The current
     *   **Bug Fixes:** Resolved a critical bug in the document update process.
     *   **Printable View:** Added a feature to print a clean, A4-formatted Document Monitoring Slip.
     *   **Custom Name Formatting:** Implemented a custom name format for signatures in the routing history.
+    *   **Modernized Summary Cards:** Redesigned the summary cards on the document tracking page with a more modern, informative, and interactive layout.
+    *   **Implemented Document Receiving Workflow:** Added a new two-step process for receiving and then taking action on documents, including a `received_date` in the `document_logs` table for more precise tracking.
+    *   **Enhanced Document Visibility:** Updated the main document list to show all documents that have been routed to or from a user's division, providing a complete history.
+    *   **Improved UI Logic:** Refined the conditions for enabling the "Edit" button and displaying the "Current Location" to better reflect the document's state.
+    *   **Created Public Document View:** Implemented a mobile-friendly, public-facing page for viewing a document's history, accessible via a QR code.
+    *   **Added Public Document Receiving:** Implemented a feature to allow public users to receive documents by entering their employee ID number.
 
 ## What Works
 
@@ -47,6 +53,11 @@ The project has successfully completed the dependency upgrade phase. The current
 *   The `actions` table has been created and migrated.
 *   The application is now more secure against injection and XSS attacks.
 *   The auditing feature now correctly logs the user's public IP address.
+*   The summary cards on the document tracking page have been modernized with a new design and short descriptions.
+*   The document receiving workflow is fully functional.
+*   The public document view is mobile-friendly and displays the complete routing history.
+*   The document list now shows all documents that have interacted with the user's division.
+*   The public document receiving feature is fully functional with ID validation and user feedback.
 
 ## What's Left to Build
 

@@ -20,58 +20,99 @@
         <div class="container-fluid">
             <!-- Summary Cards -->
             <div class="row">
-                <div class="col-lg-2 col-6">
-                    <div class="small-box bg-primary">
-                        <div class="inner">
-                            <h3>{{ $totalDocumentsCreated }}</h3>
-                            <p>Total Documents Created</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-file-alt"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-6">
-                    <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>{{ $pendingDocuments }}</h3>
-                            <p>Pending</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-clock"></i>
+                <div class="col-lg col-md-6 mb-4">
+                    <div class="summary-card h-100 bg-secondary">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 class="font-weight-bold">{{ $totalDocumentsInvolved }}</h3>
+                                    <p class="mb-0">Total Documents Involved</p>
+                                    <small>All documents involving your division.</small>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-sitemap"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-6">
-                    <div class="small-box bg-warning">
-                        <div class="inner">
-                            <h3>{{ $ongoingDocuments }}<sup style="font-size: 20px">({{ $ongoingPercentage }}%)</sup></h3>
-                            <p>Ongoing</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-tasks"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-6">
-                    <div class="small-box bg-success">
-                        <div class="inner">
-                            <h3>{{ $completedDocuments }}<sup style="font-size: 20px">({{ $completedPercentage }}%)</sup></h3>
-                            <p>Completed</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-check-circle"></i>
+                <div class="col-lg col-md-6 mb-4">
+                    <div class="summary-card h-100 bg-primary">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 class="font-weight-bold">{{ $totalDocumentsCreated }}</h3>
+                                    <p class="mb-0">Total Documents Created</p>
+                                    <small>All documents initiated by your division.</small>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-6">
-                    <div class="small-box bg-danger">
-                        <div class="inner">
-                            <h3>{{ $discardedDocuments }}<sup style="font-size: 20px">({{ $discardedPercentage }}%)</sup></h3>
-                            <p>Discarded</p>
+                <div class="col-lg col-md-6 mb-4">
+                    <div class="summary-card h-100 bg-info">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 class="font-weight-bold">{{ $pendingDocuments }}</h3>
+                                    <p class="mb-0">Pending</p>
+                                    <small>Documents awaiting initial action.</small>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                            </div>
                         </div>
-                        <div class="icon">
-                            <i class="fas fa-trash-alt"></i>
+                    </div>
+                </div>
+                <div class="col-lg col-md-6 mb-4">
+                    <div class="summary-card h-100 bg-warning">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 class="font-weight-bold">{{ $ongoingDocuments }}<sup style="font-size: 1rem">({{ $ongoingPercentage }}%)</sup></h3>
+                                    <p class="mb-0">Ongoing</p>
+                                    <small>Documents currently in circulation.</small>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-tasks"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg col-md-6 mb-4">
+                    <div class="summary-card h-100 bg-success">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 class="font-weight-bold">{{ $completedDocuments }}<sup style="font-size: 1rem">({{ $completedPercentage }}%)</sup></h3>
+                                    <p class="mb-0">Completed</p>
+                                    <small>Documents that have finished their lifecycle.</small>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg col-md-6 mb-4">
+                    <div class="summary-card h-100 bg-danger">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 class="font-weight-bold">{{ $discardedDocuments }}<sup style="font-size: 1rem">({{ $discardedPercentage }}%)</sup></h3>
+                                    <p class="mb-0">Discarded</p>
+                                    <small>Documents that have been cancelled or voided.</small>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-trash-alt"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -122,7 +163,7 @@
                                         <label>Office of Origin</label>
                                         <select class="form-control" wire:model="filterOrigin">
                                             <option value="">All</option>
-                                            @foreach($divisions as $division)
+                                            @foreach($filterDivisions as $division)
                                                 <option value="{{ $division->id }}">{{ $division->division_name }}</option>
                                             @endforeach
                                         </select>
@@ -167,13 +208,10 @@
                                         @if($document->status == 'Discarded') table-danger @endif
                                     ">
                                         <td style="text-align: center">
-                                            <button class="btn btn-primary btn-sm" wire:click.prevent="viewDocument({{ $document->id }})">
+                                            <button class="btn btn-primary btn-sm" wire:click.prevent="editDocument({{ $document->id }})">
                                                 <i class="fas fa-search"></i>
                                             </button>
-                                            <button class="btn btn-primary btn-sm" wire:click.prevent="editDocument({{ $document->id }})" @if($document->status != 'Pending') disabled @endif>
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button class="btn btn-danger btn-sm" wire:click.prevent="">
+                                            <button class="btn btn-danger btn-sm" wire:click.prevent="confirmDelete({{ $document->id }})" @if(auth()->user()->userlevel_id != 1) disabled @endif>
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </td>
@@ -201,107 +239,22 @@
         </div>
     </div>
 
-    <!-- View Document Modal -->
-    <div class="modal fade" id="viewDocumentModal" tabindex="-1" role="dialog" aria-labelledby="viewDocumentModalLabel" aria-hidden="true" wire:ignore.self>
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="viewDocumentModalLabel">Document Monitoring Slip</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @if ($selectedDocument)
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="row invoice-info">
-                                    <div class="col-sm-6 invoice-col">
-                                        <strong>Office of Origin:</strong><br>
-                                        {{ $selectedDocument->division->division_name }}
-                                    </div>
-                                    <div class="col-sm-6 invoice-col">
-                                        <strong>Document Date:</strong><br>
-                                        {{ $selectedDocument->created_at->format('M d, Y h:i A') }}
-                                    </div>
-                                </div>
-                                <div class="row invoice-info mt-3">
-                                    <div class="col-sm-6 invoice-col">
-                                        <strong>Document Type:</strong><br>
-                                        {{ $selectedDocument->document_type->document_type_name }}
-                                    </div>
-                                    <div class="col-sm-6 invoice-col">
-                                        <strong>Document Title:</strong><br>
-                                        {{ $selectedDocument->document_title }}
-                                    </div>
-                                </div>
-                                <div class="row invoice-info mt-3">
-                                    <div class="col-sm-6 invoice-col">
-                                        <strong>Document Sub-Type:</strong><br>
-                                        {{ $selectedDocument->document_sub_type->document_sub_type_name }}
-                                    </div>
-                                    <div class="col-sm-6 invoice-col">
-                                        <strong>Note:</strong><br>
-                                        {{ $selectedDocument->note ?? '(No notes)' }}
-                                    </div>
-                                </div>
-                                <div class="row invoice-info mt-3">
-                                    <div class="col-sm-12 invoice-col">
-                                        <strong>Attachments:</strong><br>
-                                        {{ $selectedDocument->specify_attachments ?? '(No attachments)' }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-4 d-flex flex-column align-items-center justify-content-center">
-                                <img src="https://barcode.tec-it.com/barcode.ashx?data={{ $selectedDocument->document_reference_code }}&code=QRCode&dpi=128" alt="qrcode"/>
-                                <p class="lead mt-2">Tracking #: {{ $selectedDocument->document_reference_code }}</p>
-                            </div>
-                        </div>
-
-                        <hr>
-                        <h5 class="mt-4 mb-3">Routing History</h5>
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>From</th>
-                                        <th>To</th>
-                                        <th>Action/Remarks</th>
-                                        <th>Name/Signature</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if ($selectedDocumentLogs)
-                                        @foreach ($selectedDocumentLogs as $log)
-                                            <tr>
-                                                <td>{{ $log->created_at->format('M d, Y h:i A') }}</td>
-                                                <td>{{ $log->fromDivision->division_name }}</td>
-                                                <td>{{ $log->toDivision->division_name }}</td>
-                                                <td>{{ $log->remarks }}</td>
-                                                <td>{{ $log->userCreated->signature_name }}</td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-                    @endif
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a href="{{ $selectedDocument ? route('documents.print', $selectedDocument->id) : '#' }}" target="_blank" class="btn btn-primary">Print</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Edit Document Modal -->
     <div class="modal fade" id="editDocumentModal" tabindex="-1" role="dialog" aria-labelledby="editDocumentModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editDocumentModalLabel">Update Document Status</h5>
+                    <h5 class="modal-title" id="editDocumentModalLabel">Document Monitoring Slip
+                        @if ($selectedDocument)
+                            <span class="badge
+                                @if($selectedDocument->status == 'Pending') badge-info @endif
+                                @if($selectedDocument->status == 'Ongoing') badge-warning @endif
+                                @if($selectedDocument->status == 'Completed') badge-success @endif
+                                @if($selectedDocument->status == 'Discarded') badge-danger @endif
+                            ">{{ $selectedDocument->status }}</span>
+                        @endif
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -348,7 +301,7 @@
                                 </div>
                             </div>
                             <div class="col-4 d-flex flex-column align-items-center justify-content-center">
-                                <img src="https://barcode.tec-it.com/barcode.ashx?data={{ $selectedDocument->document_reference_code }}&code=QRCode&dpi=128" alt="qrcode"/>
+                                <img src="https://barcode.tec-it.com/barcode.ashx?data={{ route('documents.public.show', ['tracking_number' => \Crypt::encryptString($selectedDocument->document_reference_code)]) }}&code=QRCode&dpi=96" alt="qrcode"/>
                                 <p class="lead mt-2">Tracking #: {{ $selectedDocument->document_reference_code }}</p>
                             </div>
                         </div>
@@ -358,8 +311,9 @@
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead class="thead-light">
-                                    <tr>
-                                        <th>Date</th>
+                                    <tr style="text-align: center; vertical-align: middle;">
+                                        <th>Date Created/Forwarded</th>
+                                        <th>Received by</th>
                                         <th>From</th>
                                         <th>To</th>
                                         <th>Action/Remarks</th>
@@ -370,9 +324,14 @@
                                     @if ($selectedDocumentLogs)
                                         @foreach ($selectedDocumentLogs as $log)
                                             <tr>
-                                                <td>{{ $log->created_at->format('M d, Y h:i A') }}</td>
+                                                <td>{{ ($log->forwarded_date ?? $log->created_at)->format('M d, Y h:i A') }}</td>
+                                                <td>
+                                                    @if ($log->received_date)
+                                                        {{ $log->received_date->format('M d, Y h:i A') }} by {{ $log->userReceived->signature_name ?? '' }}
+                                                    @endif
+                                                </td>
                                                 <td>{{ $log->fromDivision->division_name }}</td>
-                                                <td>{{ $log->toDivision->division_name }}</td>
+                                                <td>{{ $log->toDivision->division_name ?? '' }}</td>
                                                 <td>{{ $log->remarks }}</td>
                                                 <td>{{ $log->userCreated->signature_name }}</td>
                                             </tr>
@@ -384,41 +343,55 @@
 
                         <!-- Action Form -->
                         <hr>
-                        <h5 class="mt-4 mb-3">Take Action</h5>
-                        <form wire:submit.prevent="updateDocument">
-                            <div class="form-group">
-                                <label for="selectedAction">Action</label>
-                                <select class="form-control" id="selectedAction" wire:model="selectedAction">
-                                    <option value="">Select Action</option>
-                                    @foreach($actions as $action)
-                                        <option value="{{ $action->id }}">{{ $action->action_name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('selectedAction') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-
-                            @if($selectedAction == 1) <!-- Forward -->
-                                <div class="form-group">
-                                    <label for="edit_to_division_id">Forward To</label>
-                                    <select class="form-control" id="edit_to_division_id" wire:model="edit_to_division_id">
-                                        <option value="">Select Division</option>
-                                        @foreach($divisions as $division)
-                                            <option value="{{ $division->id }}">{{ $division->division_name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('edit_to_division_id') <span class="text-danger">{{ $message }}</span> @enderror
+                        @if ($selectedDocument)
+                            @if ($selectedDocument->isPendingReception())
+                                <div class="text-center">
+                                    <button class="btn btn-primary btn-lg" wire:click.prevent="receiveDocument">
+                                        <i class="fas fa-inbox mr-2"></i> Receive Document
+                                    </button>
                                 </div>
+                            @elseif ($selectedDocument->isReadyForAction())
+                                <h5 class="mt-4 mb-3">Take Action</h5>
+                                <form wire:submit.prevent="updateDocument">
+                                    <div class="form-group">
+                                        <label for="selectedAction">Action</label>
+                                        <select class="form-control" id="selectedAction" wire:model="selectedAction">
+                                            <option value="">Select Action</option>
+                                            @foreach($actions as $action)
+                                                <option value="{{ $action->id }}">{{ $action->action_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('selectedAction') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    @if($selectedAction == 1) <!-- Forward -->
+                                    <div class="form-group">
+                                        <label for="edit_to_division_id">Forward To</label>
+                                        <select class="form-control" id="edit_to_division_id" wire:model.defer="edit_to_division_id">
+                                            <option value="">Select Division</option>
+                                            @foreach($formDivisions as $division)
+                                                    <option value="{{ $division->id }}">{{ $division->division_name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('edit_to_division_id') <span class="text-danger">{{ $message }}</span> @enderror
+                                        </div>
+                                    @endif
+
+                                    <div class="form-group">
+                                        <label for="edit_remarks">Remarks</label>
+                                        <textarea class="form-control" id="edit_remarks" rows="3" wire:model.defer="edit_remarks"></textarea>
+                                        @error('edit_remarks') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
                             @endif
-
-                            <div class="form-group">
-                                <label for="edit_remarks">Remarks</label>
-                                <textarea class="form-control" id="edit_remarks" rows="3" wire:model="edit_remarks"></textarea>
-                                @error('edit_remarks') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+                        @endif
                     @endif
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="{{ $selectedDocument ? route('documents.print', $selectedDocument->id) : '#' }}" target="_blank" class="btn btn-primary">Print</a>
                 </div>
             </div>
         </div>
@@ -485,7 +458,7 @@
                                     <label for="to_division_id">Forward To</label>
                                     <select class="form-control" id="to_division_id" wire:model="to_division_id">
                                         <option value="">Select Division</option>
-                                        @foreach($divisions as $division)
+                                        @foreach($formDivisions as $division)
                                             <option value="{{ $division->id }}">{{ $division->division_name }}</option>
                                         @endforeach
                                     </select>
@@ -507,20 +480,80 @@
             </div>
         </div>
     </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteDocumentModal" tabindex="-1" aria-labelledby="deleteDocumentModalLabel" wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form autocomplete="off" wire:submit.prevent="deleteDocument">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteDocumentModalLabel">Are you sure you want to delete this record?</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please enter your password to confirm deletion:</p>
+                        <input type="password" wire:model="password" class="form-control" placeholder="Enter your password">
+                        @error('password') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            <span><i class="fa fa-ban mr-2"></i>Cancel</span>
+                        </button>
+                        <button type="submit" class="btn btn-danger">
+                            <span><i class="fas fa-trash-alt mr-2"></i>Delete</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 @push('scripts')
+    <style>
+        .summary-card {
+            border-radius: 0.5rem;
+            border: none;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            color: #fff;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .summary-card .card-body {
+            padding: 1.25rem;
+        }
+
+        .summary-card .icon {
+            font-size: 3.5rem;
+            opacity: 0.3;
+        }
+
+        .summary-card h3 {
+            font-size: 2.25rem;
+        }
+    </style>
     <script>
         window.addEventListener('closeModal', event => {
             $('#createSlipModal').modal('hide');
         });
 
-        window.addEventListener('show-view-document-modal', event => {
-            $('#viewDocumentModal').modal('show');
-        });
-
         window.addEventListener('show-edit-document-modal', event => {
             $('#editDocumentModal').modal('show');
+        });
+
+        window.addEventListener('close-edit-modal', event => {
+            $('#editDocumentModal').modal('hide');
+        });
+
+        window.addEventListener('show-delete-document-modal', event => {
+            $('#deleteDocumentModal').modal('show');
+        });
+
+        window.addEventListener('close-delete-document-modal', event => {
+            $('#deleteDocumentModal').modal('hide');
         });
     </script>
 @endpush

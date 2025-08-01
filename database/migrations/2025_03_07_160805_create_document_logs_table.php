@@ -21,8 +21,14 @@ class CreateDocumentLogsTable extends Migration
             $table->integer('from_division_id')->nullable();
             $table->integer('to_division_id')->nullable();
             $table->string('remarks')->nullable();
+            $table->datetime('received_date')->nullable();
+            $table->integer('received_by')->nullable();
+            $table->datetime('forwarded_date')->nullable();
+            $table->integer('forwarded_by')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
+            $table->datetime('deleted_at')->nullable();
             $table->timestamps();
         });
     }

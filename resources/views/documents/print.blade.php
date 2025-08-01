@@ -13,6 +13,14 @@
             .no-print {
                 display: none;
             }
+            hr {
+                border-top: 1px solid black !important;
+            }
+            .table-bordered th,
+            .table-bordered td,
+            .table-bordered {
+                border: 1px solid black !important;
+            }
         }
     </style>
 </head>
@@ -70,7 +78,7 @@
                 </div>
             </div>
             <div class="col-4 d-flex flex-column align-items-center justify-content-center">
-                <img src="https://barcode.tec-it.com/barcode.ashx?data={{ $document->document_reference_code }}&code=QRCode&dpi=128" alt="qrcode"/>
+                <img src="https://barcode.tec-it.com/barcode.ashx?data={{ route('documents.public.show', ['tracking_number' => Crypt::encryptString($document->document_reference_code)]) }}&code=QRCode&dpi=96" alt="qrcode"/>
                 <p class="lead mt-2">Tracking #: {{ $document->document_reference_code }}</p>
             </div>
         </div>
@@ -80,8 +88,9 @@
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead class="thead-light">
-                    <tr>
-                        <th>Date</th>
+                    <tr style="text-align: center; vertical-align: middle;">
+                        <th>Date Created/Forwarded</th>
+                        <th>Received by</th>
                         <th>From</th>
                         <th>To</th>
                         <th>Action/Remarks</th>
@@ -90,11 +99,16 @@
                 </thead>
                 <tbody id="routing-history-table-body">
                     @if ($document->logs)
-                        @foreach ($document->logs as $log)
+                        @foreach ($document->logs->whereNotNull('action_id') as $log)
                             <tr>
-                                <td>{{ $log->created_at->format('M d, Y h:i A') }}</td>
+                                <td>{{ ($log->forwarded_date ?? $log->created_at)->format('M d, Y h:i A') }}</td>
+                                <td>
+                                    @if ($log->received_date)
+                                        {{ $log->received_date->format('M d, Y h:i A') }} by {{ $log->userReceived->signature_name ?? '' }}
+                                    @endif
+                                </td>
                                 <td>{{ $log->fromDivision->division_name }}</td>
-                                <td>{{ $log->toDivision->division_name }}</td>
+                                <td>{{ $log->toDivision->division_name ?? '' }}</td>
                                 <td>{{ $log->remarks }}</td>
                                 <td>{{ $log->userCreated->signature_name }}</td>
                             </tr>
@@ -110,16 +124,16 @@
             const tableBody = document.getElementById('routing-history-table-body');
             const rowHeight = 38; // Approximate height of a row in pixels
             const a4Height = 1123; // A4 height in pixels at 96 DPI
-            const contentHeight = 450; // Approximate height of content above the table
+            const contentHeight = 500; // Adjusted height of content above the table
             const availableHeight = a4Height - contentHeight;
             const existingRows = tableBody.getElementsByTagName('tr').length;
             const maxRows = Math.floor(availableHeight / rowHeight);
-            const rowsToAdd = maxRows - existingRows;
+            let rowsToAdd = maxRows - existingRows;
 
             if (rowsToAdd > 0) {
                 for (let i = 0; i < rowsToAdd; i++) {
                     const newRow = tableBody.insertRow();
-                    for (let j = 0; j < 5; j++) {
+                    for (let j = 0; j < 6; j++) {
                         const newCell = newRow.insertCell();
                         newCell.innerHTML = '&nbsp;';
                     }

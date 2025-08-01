@@ -29,16 +29,18 @@ The primary focus is now on refactoring the application's Livewire components to
     *   **View Modal:** The detailed "Document Monitoring Slip" has been moved into a modal, which is triggered by the view button and displays a QR code for the tracking number.
     *   **Reference Code:** The logic for the `document_reference_code` has been updated to be sequential per year and division.
     *   **Model Relationships:** Added multiple new relationships to the `Document` and `DocumentLog` models to support the new features.
-    *   **Edit/Action Modal:** Implemented a modal for taking action on "Pending" documents. This allows users to forward, complete, or discard documents, which creates a new routing log and deactivates the previous one.
+    *   **Corrected Action Workflow:** Refactored the logic in the action modal to correctly implement a two-step process. Users must now click a "Receive" button before the "Take Action" form is displayed, ensuring the workflow is followed correctly.
     *   **Timestamped Documents:** Updated the document tracking page to display both the date and time for all document-related timestamps, providing more precise tracking information.
     *   **Functional Search:** Implemented a search feature on the document tracking page that allows users to filter documents by their tracking number or title in real-time.
-    *   **Advanced Filtering:** Added advanced filtering capabilities to the document tracking page, allowing users to filter documents by status, office of origin, and document type.
-    *   **Dynamic Summary Cards:** The summary cards on the document tracking page are now fully dynamic, displaying counts and percentages based on the user's division.
-    *   **Personalized Document List:** The main document list is now filtered to only show documents created by the user, within the user's division, or routed to the user's division.
-    *   **Corrected Status Logic:** The "Ongoing" status logic has been corrected to include all documents originating from the user's division.
-    *   **Bug Fixes:** Fixed a critical bug in the `updateDocument()` function that caused the wrong document log to be deactivated.
+    *   **Corrected Advanced Filtering:** Aligned the "Ongoing" status filter with the summary card logic to ensure consistency. Also corrected the "Office of Origin" filter to include all divisions.
+    *   **Accurate Summary Cards:** Refactored the summary card queries to be based on all documents involving the user's division (created, sent, or received), not just those they created. Added a new "Total Documents Involved" card to reflect this complete count.
+    *   **Improved Location Logic:** The "Current Location" for completed or discarded documents now correctly shows the last division that handled it, instead of "N/A".
     *   **Printable View:** Implemented a printable version of the Document Monitoring Slip, complete with a print button and A4-optimized styling.
-    *   **Custom Name Formatting:** Created a custom name format for the "Name/Signature" field in the routing history.
+    *   **Public Document View:** Implemented a mobile-friendly, public-facing page for viewing a document's history, accessible via a QR code, and a feature for public users to receive documents.
+*   **Data Integrity and Auditing:**
+    *   **Cascading Soft Deletes:** Implemented a robust soft delete system for documents. When a document is deleted, all of its associated tracking logs are now also soft-deleted.
+    *   **User Tracking on Deletes:** The user ID of the person who deleted a document is now recorded on both the document and all of its logs.
+    *   **Auditing:** The `Document` and `DocumentLog` models are now fully auditable, tracking all creates, updates, and deletes in the `audits` table.
 *   **Strengthened Security:**
     *   **Input Sanitization:** Added `strip_tags` to the registration process to prevent the storage of malicious HTML.
     *   **IP Address Resolution:** Configured the `TrustProxies` middleware to correctly capture user IP addresses behind a reverse proxy.

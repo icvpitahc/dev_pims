@@ -29,6 +29,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->integer('status_type_id')->nullable();
             $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
+            $table->datetime('deleted_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -37,6 +37,9 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return redirect()->route('login');
 });
+
+Route::get('/documents/track/{tracking_number}', [DocumentController::class, 'publicShow'])->name('documents.public.show');
+
 Route::get('/pages/css/css-form', CssForm::class)->name('css-form');
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth', 'verified', 'activated.account']], function(){

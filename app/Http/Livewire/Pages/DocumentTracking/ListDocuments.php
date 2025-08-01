@@ -8,6 +8,8 @@ use App\Models\Document;
 use App\Models\DocumentLog;
 use App\Models\DocumentSubType;
 use App\Models\DocumentType;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -33,6 +35,7 @@ class ListDocuments extends Component
     public $filterOrigin = '';
     public $filterDocumentType = '';
 
+    public $totalDocumentsInvolved = 0;
     public $totalDocumentsCreated = 0;
     public $pendingDocuments = 0;
     public $ongoingDocuments = 0;
@@ -44,6 +47,8 @@ class ListDocuments extends Component
     public $discardedPercentage = 0;
 
     public $documentSubTypes = [];
+    public $documentIdToDelete;
+    public $password;
 
     private function resetInputFields()
     {
@@ -110,6 +115,8 @@ class ListDocuments extends Component
             'to_division_id' => $this->to_division_id,
             'remarks' => $this->remarks,
             'created_by' => $user->id,
+            'forwarded_date' => now(),
+            'forwarded_by' => $user->id,
         ]);
 
         $this->resetInputFields();
@@ -120,7 +127,7 @@ class ListDocuments extends Component
     public function editDocument($documentId)
     {
         $this->selectedDocument = Document::with(['document_type', 'document_sub_type', 'division'])->find($documentId);
-        $this->selectedDocumentLogs = DocumentLog::with(['fromDivision', 'toDivision', 'userCreated'])->where('document_id', $documentId)->get();
+        $this->selectedDocumentLogs = DocumentLog::with(['fromDivision', 'toDivision', 'userCreated', 'userReceived'])->where('document_id', $documentId)->whereNotNull('action_id')->get();
         $this->dispatchBrowserEvent('show-edit-document-modal');
     }
 
@@ -133,30 +140,78 @@ class ListDocuments extends Component
         ]);
 
         $user = auth()->user();
-        $oldLog = $this->selectedDocument->latestActiveLog;
+        $activeLog = $this->selectedDocument->latestActiveLog;
 
-        DocumentLog::create([
-            'document_id' => $this->selectedDocument->id,
-            'status_type_id' => 1, // Active
-            'action_id' => $this->selectedAction,
-            'from_division_id' => $user->division_id,
-            'to_division_id' => $this->edit_to_division_id,
-            'remarks' => $this->edit_remarks,
-            'created_by' => $user->id,
-        ]);
+        if ($activeLog) {
+            $updateData = [
+                'action_id' => $this->selectedAction,
+                'to_division_id' => $this->edit_to_division_id,
+                'remarks' => $this->edit_remarks,
+            ];
 
-        if ($oldLog) {
-            $oldLog->update(['status_type_id' => 2]); // Inactive
+            if ($this->selectedAction == 1) { // Forward
+                $updateData['forwarded_date'] = now();
+                $updateData['forwarded_by'] = $user->id;
+            }
+
+            $activeLog->update($updateData);
         }
 
         $this->dispatchBrowserEvent('success-message', ['message' => 'Document successfully updated.']);
+        $this->dispatchBrowserEvent('close-edit-modal');
     }
 
-    public function viewDocument($documentId)
+    public function receiveDocument()
     {
-        $this->selectedDocument = Document::with(['document_type', 'document_sub_type', 'division'])->find($documentId);
-        $this->selectedDocumentLogs = DocumentLog::with(['fromDivision', 'toDivision', 'userCreated'])->where('document_id', $documentId)->get();
-        $this->dispatchBrowserEvent('show-view-document-modal');
+        $user = auth()->user();
+        $activeLog = $this->selectedDocument->latestActiveLog;
+
+        if ($activeLog && is_null($activeLog->received_date)) {
+            $activeLog->update([
+                'received_date' => now(),
+                'status_type_id' => 2, // Inactive
+                'received_by' => $user->id,
+            ]);
+
+            DocumentLog::create([
+                'document_id' => $this->selectedDocument->id,
+                'status_type_id' => 1, // Active
+                'action_id' => null,
+                'from_division_id' => $user->division_id,
+                'to_division_id' => null,
+                'remarks' => null,
+                'created_by' => $user->id,
+                'received_date' => null,
+            ]);
+
+        $this->dispatchBrowserEvent('success-message', ['message' => 'Document successfully received.']);
+        $this->dispatchBrowserEvent('close-edit-modal');
+        }
+    }
+    
+    public function confirmDelete($documentId)
+    {
+        $this->documentIdToDelete = $documentId;
+        $this->password = '';
+        $this->dispatchBrowserEvent('show-delete-document-modal');
+    }
+
+    public function deleteDocument()
+    {
+        $this->validate([
+            'password' => 'required',
+        ]);
+
+        if (Hash::check($this->password, auth()->user()->password)) {
+            $document = Document::findOrFail($this->documentIdToDelete);
+            $document->update(['deleted_by' => auth()->id()]);
+            $document->delete();
+            $this->dispatchBrowserEvent('success-message', ['message' => 'Document successfully deleted.']);
+            $this->dispatchBrowserEvent('close-delete-document-modal');
+        } else {
+            $this->dispatchBrowserEvent('error-message', ['message' => 'Incorrect Password']);
+        }
+        $this->password = '';
     }
 
     public function updatedDocumentTypeId($value)
@@ -188,16 +243,26 @@ class ListDocuments extends Component
     {
         $user = auth()->user();
 
-        $this->totalDocumentsCreated = Document::where('division_id', $user->division_id)->count();
-        $this->pendingDocuments = Document::whereHas('latestActiveLog', fn($q) => $q->where('to_division_id', $user->division_id))->count();
-        $this->ongoingDocuments = Document::where('division_id', $user->division_id)->whereDoesntHave('latestLog', fn($q) => $q->whereIn('action_id', [2, 3]))->count();
-        $this->completedDocuments = Document::where('division_id', $user->division_id)->whereHas('latestLog', fn($q) => $q->where('action_id', 3))->count();
-        $this->discardedDocuments = Document::where('division_id', $user->division_id)->whereHas('latestLog', fn($q) => $q->where('action_id', 2))->count();
+        $baseDocumentQuery = Document::where(function ($query) use ($user) {
+            $query->where('division_id', $user->division_id)
+                ->orWhereHas('logs', function ($q) use ($user) {
+                    $q->where('from_division_id', $user->division_id)
+                      ->orWhere('to_division_id', $user->division_id);
+                });
+        });
 
-        if ($this->totalDocumentsCreated > 0) {
-            $this->ongoingPercentage = round(($this->ongoingDocuments / $this->totalDocumentsCreated) * 100, 2);
-            $this->completedPercentage = round(($this->completedDocuments / $this->totalDocumentsCreated) * 100, 2);
-            $this->discardedPercentage = round(($this->discardedDocuments / $this->totalDocumentsCreated) * 100, 2);
+        $this->totalDocumentsInvolved = (clone $baseDocumentQuery)->count();
+        $this->totalDocumentsCreated = Document::where('division_id', $user->division_id)->count();
+        $this->pendingDocuments = (clone $baseDocumentQuery)->whereHas('latestActiveLog', fn($q) => $q->where('to_division_id', $user->division_id))->count();
+        $this->ongoingDocuments = (clone $baseDocumentQuery)->whereDoesntHave('latestLog', fn($q) => $q->whereIn('action_id', [2, 3]))->count();
+        $this->completedDocuments = (clone $baseDocumentQuery)->whereHas('latestLog', fn($q) => $q->where('action_id', 3))->count();
+        $this->discardedDocuments = (clone $baseDocumentQuery)->whereHas('latestLog', fn($q) => $q->where('action_id', 2))->count();
+        
+        $totalForPercentage = (clone $baseDocumentQuery)->count();
+        if ($totalForPercentage > 0) {
+            $this->ongoingPercentage = round(($this->ongoingDocuments / $totalForPercentage) * 100, 2);
+            $this->completedPercentage = round(($this->completedDocuments / $totalForPercentage) * 100, 2);
+            $this->discardedPercentage = round(($this->discardedDocuments / $totalForPercentage) * 100, 2);
         } else {
             $this->ongoingPercentage = 0;
             $this->completedPercentage = 0;
@@ -205,14 +270,7 @@ class ListDocuments extends Component
         }
 
         $documentTypes = DocumentType::all();
-        $documents = Document::with(['document_type', 'division', 'latestLog', 'latestActiveLog.toDivision'])
-            ->where(function ($query) use ($user) {
-                $query->where('created_by', $user->id)
-                    ->orWhere('division_id', $user->division_id)
-                    ->orWhereHas('latestActiveLog', function ($q) use ($user) {
-                        $q->where('to_division_id', $user->division_id);
-                    });
-            })
+        $documents = (clone $baseDocumentQuery)->with(['document_type', 'division', 'latestLog', 'latestActiveLog.toDivision', 'logs.userReceived'])
             ->when($this->search, function ($query) {
                 $query->where('document_reference_code', 'like', '%' . $this->search . '%')
                     ->orWhere('document_title', 'like', '%' . $this->search . '%');
@@ -225,22 +283,25 @@ class ListDocuments extends Component
                 } elseif ($this->filterStatus == 'Pending') {
                     $query->whereHas('latestActiveLog', fn($q) => $q->where('to_division_id', $user->division_id));
                 } elseif ($this->filterStatus == 'Ongoing') {
-                    $query->where('created_by', $user->id)
-                          ->whereDoesntHave('latestLog', fn($q) => $q->whereIn('action_id', [2, 3]));
+                    $query->whereDoesntHave('latestLog', fn($q) => $q->whereIn('action_id', [2, 3]));
                 }
             })
             ->when($this->filterOrigin, fn($q) => $q->where('division_id', $this->filterOrigin))
             ->when($this->filterDocumentType, fn($q) => $q->where('document_type_id', $this->filterDocumentType))
             ->latest()
             ->paginate(10);
-        $divisions = Division::all();
+        
+        $formDivisions = Division::where('id', '!=', $user->division_id)->get();
+        $filterDivisions = Division::all();
         $actions = Action::all();
 
         return view('livewire.pages.document-tracking.list-documents', [
             'documentTypes' => $documentTypes,
             'documents' => $documents,
-            'divisions' => $divisions,
+            'formDivisions' => $formDivisions,
+            'filterDivisions' => $filterDivisions,
             'actions' => $actions,
         ]);
+        
     }
 }
