@@ -39,7 +39,8 @@ The project has successfully completed the dependency upgrade phase. The current
     *   **Enhanced Document Visibility:** Updated the main document list to show all documents that have been routed to or from a user's division, providing a complete history.
     *   **Improved UI Logic:** Refined the conditions for enabling the "Edit" button and displaying the "Current Location" to better reflect the document's state.
     *   **Created Public Document View:** Implemented a mobile-friendly, public-facing page for viewing a document's history, accessible via a QR code.
-    *   **Added Public Document Receiving:** Implemented a feature to allow public users to receive documents by entering their employee ID number.
+*   **Added Public Document Receiving:** Implemented a feature to allow public users to receive documents by entering their employee ID number.
+*   **Refactored CSS Results Page:** Refactored the "Client Satisfaction Measurement Results" page to use a dedicated controller for API requests, resolving an issue with the graphs not displaying.
 
 ## What Works
 
@@ -58,6 +59,7 @@ The project has successfully completed the dependency upgrade phase. The current
 *   The public document view is mobile-friendly and displays the complete routing history.
 *   The document list now shows all documents that have interacted with the user's division.
 *   The public document receiving feature is fully functional with ID validation and user feedback.
+*   The "Client Satisfaction Measurement Results" page is now fully functional.
 
 ## What's Left to Build
 
@@ -69,3 +71,4 @@ The project has successfully completed the dependency upgrade phase. The current
 
 *   The `rappasoft/laravel-livewire-tables` package upgrade to v2.0 is a major change and is expected to cause significant breaking changes in all data tables.
 *   **Bootstrap 4 Legacy:** The core application layout (`b_app.blade.php`) is dependent on Bootstrap 4 via the AdminLTE theme. This creates a technical debt and a potential obstacle for future UI modernization efforts, as most new pages are being built with Bootstrap 5. A full migration has been deemed high-risk and deferred.
+*   **Bugs in User Management:** The `ListUsers` page contains several minor bugs, including incorrect filter labels, broken links (e.g., the "View" button), and calls to undefined methods (e.g., the "Edit" button). These issues need to be addressed as part of the Livewire component refactoring.

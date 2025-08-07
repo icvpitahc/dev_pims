@@ -44,7 +44,9 @@ The primary focus is now on refactoring the application's Livewire components to
 *   **Strengthened Security:**
     *   **Input Sanitization:** Added `strip_tags` to the registration process to prevent the storage of malicious HTML.
     *   **IP Address Resolution:** Configured the `TrustProxies` middleware to correctly capture user IP addresses behind a reverse proxy.
-    *   **XSS Prevention:** Verified that the user list page properly escapes output, mitigating the risk of XSS attacks.
+*   **XSS Prevention:** Verified that the user list page properly escapes output, mitigating the risk of XSS attacks.
+*   **Refactored CSS Results Page:** Refactored the "Client Satisfaction Measurement Results" page to use a dedicated controller for API requests, resolving an issue with the graphs not displaying.
+*   **Reviewed User Management:** The `ListUsers` page was reviewed and found to be functional at a basic level, but contains several bugs and inconsistencies, including incorrect filter labels, broken links, and calls to undefined methods. This is likely a result of the ongoing Laravel 9 upgrade and will need to be addressed during the component refactoring phase.
 
 ## Key Activities
 

@@ -578,7 +578,7 @@ function generateChart() {
         // Get the last segment, which should be the year
         const year = segments[segments.length - 1];
         const app_url = '{{ env('APP_URL') }}';
-        const set_url = app_url+'/api/respondents_sex/'+year+'/';
+        const set_url = app_url+'/pages/css/results/respondents_sex/'+year;
         const response = await fetch(set_url);
         const datapoints = await response.json();
         return datapoints;
@@ -607,7 +607,7 @@ function generateChart() {
         const year = $param;
         const report_type_id = document.getElementById("report_type_id");
         const app_url = '{{ env('APP_URL') }}';
-        const url = app_url+'/api/respondents_sex_filter/'+year+'/'+report_type_id;
+        const url = app_url+'/pages/css/results/respondents_sex_filter/'+year+'/'+report_type_id;
         const response = await fetch(url);
         const datapoints = await response.json();
         return datapoints;
@@ -698,7 +698,7 @@ const configA = {
         // Get the last segment, which should be the year
         const year = segments[segments.length - 1];
         const app_url = '{{ env('APP_URL') }}';
-        const set_url = app_url+'/api/respondents_client_type/'+year+'/';
+        const set_url = app_url+'/pages/css/results/respondents_client_type/'+year;
         const response = await fetch(set_url);
         const datapoints = await response.json();
         return datapoints;
@@ -727,7 +727,7 @@ const configA = {
         const year = $param;
         const report_type_id = document.getElementById("report_type_id");
         const app_url = '{{ env('APP_URL') }}';
-        const url = app_url+'/api/respondents_client_type_filter/'+year+'/'+report_type_id;
+        const url = app_url+'/pages/css/results/respondents_client_type_filter/'+year+'/'+report_type_id;
         const response = await fetch(url);
         const datapoints = await response.json();
         return datapoints;
@@ -829,7 +829,7 @@ const configB = {
         // Get the last segment, which should be the year
         const year = segments[segments.length - 1];
         const app_url = '{{ env('APP_URL') }}';
-        const set_url = app_url+'/api/respondents_transacting_office/'+year+'/';
+        const set_url = app_url+'/pages/css/results/respondents_transacting_office/'+year;
         const response = await fetch(set_url);
         const datapoints = await response.json();
         return datapoints;
@@ -858,7 +858,7 @@ const configB = {
         const year = $param;
         const report_type_id = document.getElementById("report_type_id");
         const app_url = '{{ env('APP_URL') }}';
-        const url = app_url+'/api/respondents_transacting_office_filter/'+year+'/'+report_type_id;
+        const url = app_url+'/pages/css/results/respondents_transacting_office_filter/'+year+'/'+report_type_id;
         const response = await fetch(url);
         const datapoints = await response.json();
         return datapoints;
@@ -959,7 +959,7 @@ const configC = {
         // Get the last segment, which should be the year
         const year = segments[segments.length - 1];
         const app_url = '{{ env('APP_URL') }}';
-        const set_url = app_url+'/api/ratings/'+year+'/';
+        const set_url = app_url+'/pages/css/results/ratings/'+year;
         const response = await fetch(set_url);
         const datapoints = await response.json();
         return datapoints;
@@ -1018,7 +1018,7 @@ const configC = {
         const year = $param;
         const report_type_id = document.getElementById("report_type_id");
         const app_url = '{{ env('APP_URL') }}';
-        const url = app_url+'/api/ratings/'+year+'/'+report_type_id;
+        const url = app_url+'/pages/css/results/ratings/'+year+'/'+report_type_id;
         const response = await fetch(url);
         const datapoints = await response.json();
         return datapoints;
@@ -1202,7 +1202,7 @@ const configD = {
         // Get the last segment, which should be the year
         const year = segments[segments.length - 1];
         const app_url = '{{ env('APP_URL') }}';
-        const set_url = app_url+'/api/average/'+year+'/';
+        const set_url = app_url+'/pages/css/results/average/'+year;
         const response = await fetch(set_url);
         const datapoints = await response.json();
         return datapoints;
@@ -1237,7 +1237,7 @@ const configD = {
         const year = $param;
         const report_type_id = document.getElementById("report_type_id");
         const app_url = '{{ env('APP_URL') }}';
-        const url = app_url+'/api/average/'+year+'/'+report_type_id;
+        const url = app_url+'/pages/css/results/average/'+year+'/'+report_type_id;
         const response = await fetch(url);
         const datapoints = await response.json();
         return datapoints;
@@ -1377,7 +1377,7 @@ const configE = {
         // Get the last segment, which should be the year
         const year = segments[segments.length - 1];
         const app_url = '{{ env('APP_URL') }}';
-        const set_url = app_url+'/api/respondents_availed_service/'+year+'/';
+        const set_url = app_url+'/pages/css/results/respondents_availed_service/'+year;
         const response = await fetch(set_url);
         const datapoints = await response.json();
         return datapoints;
@@ -1406,7 +1406,7 @@ const configE = {
         const year = $param;
         const report_type_id = document.getElementById("report_type_id");
         const app_url = '{{ env('APP_URL') }}';
-        const url = app_url+'/api/respondents_availed_service_filter/'+year+'/'+report_type_id;
+        const url = app_url+'/pages/css/results/respondents_availed_service_filter/'+year+'/'+report_type_id;
         const response = await fetch(url);
         const datapoints = await response.json();
         return datapoints;
@@ -1506,7 +1506,7 @@ const configF = {
     // Get the last segment, which should be the year
     const year = segments[segments.length - 1];
     const app_url = '{{ env('APP_URL') }}';
-    const set_url = app_url+'/api/respondents_client_group/'+year+'/';
+    const set_url = app_url+'/pages/css/results/respondents_client_group/'+year;
     const response = await fetch(set_url);
     const datapoints = await response.json();
     return datapoints;
@@ -1535,7 +1535,7 @@ function generateChartG() {
     const year = $param;
     const report_type_id = document.getElementById("report_type_id");
     const app_url = '{{ env('APP_URL') }}';
-    const url = app_url+'/api/respondents_client_group_filter/'+year+'/'+report_type_id;
+    const url = app_url+'/pages/css/results/respondents_client_group_filter/'+year+'/'+report_type_id;
     const response = await fetch(url);
     const datapoints = await response.json();
     return datapoints;
@@ -1629,7 +1629,7 @@ function updateChartH() {
     // Get the last segment, which should be the year
     const year = segments[segments.length - 1];
     const app_url = '{{ env('APP_URL') }}';
-    const set_url = app_url+'/api/respondents_region/'+year+'/';
+    const set_url = app_url+'/pages/css/results/respondents_region/'+year;
     const response = await fetch(set_url);
     const datapoints = await response.json();
     return datapoints;
@@ -1658,7 +1658,7 @@ function generateChartH() {
     const year = $param;
     const report_type_id = document.getElementById("report_type_id");
     const app_url = '{{ env('APP_URL') }}';
-    const url = app_url+'/api/respondents_region_filter/'+year+'/'+report_type_id;
+    const url = app_url+'/pages/css/results/respondents_region_filter/'+year+'/'+report_type_id;
     const response = await fetch(url);
     const datapoints = await response.json();
     return datapoints;
@@ -1752,7 +1752,7 @@ function updateChartI() {
     // Get the last segment, which should be the year
     const year = segments[segments.length - 1];
     const app_url = '{{ env('APP_URL') }}';
-    const set_url = app_url+'/api/respondents_awareness_response/'+year+'/';
+    const set_url = app_url+'/pages/css/results/respondents_awareness_response/'+year;
     const response = await fetch(set_url);
     const datapoints = await response.json();
     return datapoints;
@@ -1781,7 +1781,7 @@ function generateChartI() {
     const year = $param;
     const report_type_id = document.getElementById("report_type_id");
     const app_url = '{{ env('APP_URL') }}';
-    const url = app_url+'/api/respondents_awareness_response_filter/'+year+'/'+report_type_id;
+    const url = app_url+'/pages/css/results/respondents_awareness_response_filter/'+year+'/'+report_type_id;
     const response = await fetch(url);
     const datapoints = await response.json();
     return datapoints;
@@ -1875,7 +1875,7 @@ function updateChartJ() {
     // Get the last segment, which should be the year
     const year = segments[segments.length - 1];
     const app_url = '{{ env('APP_URL') }}';
-    const set_url = app_url+'/api/respondents_visibility_response/'+year+'/';
+    const set_url = app_url+'/pages/css/results/respondents_visibility_response/'+year;
     const response = await fetch(set_url);
     const datapoints = await response.json();
     return datapoints;
@@ -1904,7 +1904,7 @@ function generateChartJ() {
     const year = $param;
     const report_type_id = document.getElementById("report_type_id");
     const app_url = '{{ env('APP_URL') }}';
-    const url = app_url+'/api/respondents_visibility_response_filter/'+year+'/'+report_type_id;
+    const url = app_url+'/pages/css/results/respondents_visibility_response_filter/'+year+'/'+report_type_id;
     const response = await fetch(url);
     const datapoints = await response.json();
     return datapoints;
@@ -1998,7 +1998,7 @@ function updateChartK() {
     // Get the last segment, which should be the year
     const year = segments[segments.length - 1];
     const app_url = '{{ env('APP_URL') }}';
-    const set_url = app_url+'/api/respondents_helpfulness_response/'+year+'/';
+    const set_url = app_url+'/pages/css/results/respondents_helpfulness_response/'+year;
     const response = await fetch(set_url);
     const datapoints = await response.json();
     return datapoints;
@@ -2027,7 +2027,7 @@ function generateChartK() {
     const year = $param;
     const report_type_id = document.getElementById("report_type_id");
     const app_url = '{{ env('APP_URL') }}';
-    const url = app_url+'/api/respondents_helpfulness_response_filter/'+year+'/'+report_type_id;
+    const url = app_url+'/pages/css/results/respondents_helpfulness_response_filter/'+year+'/'+report_type_id;
     const response = await fetch(url);
     const datapoints = await response.json();
     return datapoints;

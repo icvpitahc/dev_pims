@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Pages\Admin;
 
 use Livewire\Component;
 use App\Models\User;
+use App\Http\Livewire\Pages\Admin\ExportUsers;
 
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 use Carbon\Carbon;
 class ListUsers extends Component
@@ -82,7 +84,7 @@ class ListUsers extends Component
 
     public function exportSelected()
     {
-        return (new ExportUsers($this->checked))->download('users.xls');
+        return Excel::download(new ExportUsers($this->checked), 'users.xls');
     }
 
     public function DeleteForm($user_id)
