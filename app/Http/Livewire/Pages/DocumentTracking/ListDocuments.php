@@ -23,6 +23,7 @@ class ListDocuments extends Component
     public $note = '';
     public $to_division_id = '';
     public $remarks = '';
+    public $extremely_urgent;
 
     public $selectedDocument;
     public $selectedDocumentLogs;
@@ -60,6 +61,7 @@ class ListDocuments extends Component
         $this->to_division_id = '';
         $this->remarks = '';
         $this->documentSubTypes = [];
+        $this->extremely_urgent = false;
     }
 
     private function getDivisionInitials($name)
@@ -105,6 +107,7 @@ class ListDocuments extends Component
             'note' => $this->note,
             'division_id' => $user->division_id,
             'created_by' => $user->id,
+            'extremely_urgent_id' => $this->extremely_urgent ? 1 : null,
         ]);
 
         DocumentLog::create([
@@ -147,6 +150,7 @@ class ListDocuments extends Component
                 'action_id' => $this->selectedAction,
                 'to_division_id' => $this->edit_to_division_id,
                 'remarks' => $this->edit_remarks,
+                'updated_by' => $user->id,
             ];
 
             if ($this->selectedAction == 1) { // Forward

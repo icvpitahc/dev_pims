@@ -153,14 +153,20 @@
                                         <strong>To:</strong> {{ $log->toDivision->division_name ?? '' }}
                                     </p>
                                     <p class="mb-1"><strong>Action/Remarks:</strong> {{ $log->remarks }}</p>
-                                    <small class="text-muted">
-                                        <i class="far fa-clock mr-1"></i>Forwarded: {{ $log->created_at->format('M d, Y, h:i A') }} by {{ $log->userCreated->signature_name }}
-                                    </small>
-                                    @if($log->received_date)
-                                    <br>
-                                    <small class="text-muted">
-                                        <i class="far fa-check-circle mr-1"></i>Received: {{ $log->received_date->format('M d, Y, h:i A') }} by {{ $log->userReceived->signature_name ?? '' }}
-                                    </small>
+                                    @if ($loop->first)
+                                        <small class="text-muted">
+                                            <i class="far fa-clock mr-1"></i>Created: {{ $document->created_at->format('M d, Y, h:i A') }} by {{ $log->userCreated->signature_name }}
+                                        </small>
+                                    @else
+                                        <small class="text-muted">
+                                            <i class="far fa-check-circle mr-1"></i>Received: {{ $log->created_at->format('M d, Y, h:i A') }} by {{ $log->userCreated->signature_name }}
+                                        </small>
+                                        @if($log->forwarded_date)
+                                        <br>
+                                        <small class="text-muted">
+                                            <i class="far fa-clock mr-1"></i>Forwarded: {{ $log->forwarded_date->format('M d, Y, h:i A') }} by {{ $log->userForwarded->signature_name ?? '' }}
+                                        </small>
+                                        @endif
                                     @endif
                                 </div>
                             </div>

@@ -69,7 +69,7 @@ class PublicReceiveDocument extends Component
                 'action_id' => $this->selectedAction,
                 'to_division_id' => $this->to_division_id,
                 'remarks' => $this->remarks,
-                'created_by' => $user->id,
+                'updated_by' => $user->id,
             ];
 
             if ($this->selectedAction == 1) { // Forward

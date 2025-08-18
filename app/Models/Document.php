@@ -21,6 +21,7 @@ class Document extends Model implements Auditable
         'division_id',
         'created_by',
         'deleted_by',
+        'extremely_urgent_id',
     ];
 
     public function document_type()

@@ -21,6 +21,16 @@
             .table-bordered {
                 border: 1px solid black !important;
             }
+            .stamp {
+                border: 3px double red !important;
+                color: red !important;
+                font-weight: bold !important;
+                padding: 8px 20px !important;
+                text-transform: uppercase !important;
+                font-size: 1.5rem !important;
+                display: inline-block !important;
+                margin-top: 10px !important;
+            }
         }
     </style>
 </head>
@@ -76,6 +86,13 @@
                         {{ $document->specify_attachments ?? '(No attachments)' }}
                     </div>
                 </div>
+                @if($document->extremely_urgent_id == 1)
+                <div class="row invoice-info mt-4">
+                    <div class="col-12 text-left">
+                        <div class="stamp">Extremely Urgent</div>
+                    </div>
+                </div>
+                @endif
             </div>
             <div class="col-4 d-flex flex-column align-items-center justify-content-center">
                 <img src="https://barcode.tec-it.com/barcode.ashx?data={{ route('documents.public.show', ['tracking_number' => Crypt::encryptString($document->document_reference_code)]) }}&code=QRCode&dpi=96" alt="qrcode"/>
@@ -89,8 +106,8 @@
             <table class="table table-bordered">
                 <thead class="thead-light">
                     <tr style="text-align: center; vertical-align: middle;">
-                        <th>Date Created/Forwarded</th>
-                        <th>Received by</th>
+                        <th>Date Created/Received</th>
+                        <th>Date Forwarded</th>
                         <th>From</th>
                         <th>To</th>
                         <th>Action/Remarks</th>
@@ -101,16 +118,22 @@
                     @if ($document->logs)
                         @foreach ($document->logs->whereNotNull('action_id') as $log)
                             <tr>
-                                <td>{{ ($log->forwarded_date ?? $log->created_at)->format('M d, Y h:i A') }}</td>
                                 <td>
-                                    @if ($log->received_date)
-                                        {{ $log->received_date->format('M d, Y h:i A') }} by {{ $log->userReceived->signature_name ?? '' }}
+                                    @if ($loop->first)
+                                        Created at {{ $log->created_at->format('M d, Y h:i A') }} by {{ $log->userCreated->signature_name }}
+                                    @else
+                                        Received at {{ $log->created_at->format('M d, Y h:i A') }} by {{ $log->userCreated->signature_name ?? '' }}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($log->forwarded_date)
+                                        Forwarded at {{ $log->forwarded_date->format('M d, Y h:i A') }} by {{ $log->userForwarded->signature_name ?? '' }}
                                     @endif
                                 </td>
                                 <td>{{ $log->fromDivision->division_name }}</td>
                                 <td>{{ $log->toDivision->division_name ?? '' }}</td>
                                 <td>{{ $log->remarks }}</td>
-                                <td>{{ $log->userCreated->signature_name }}</td>
+                                <td>{{ $log->userForwarded->signature_name ?? '' }}</td>
                             </tr>
                         @endforeach
                     @endif
@@ -121,26 +144,42 @@
 
     <script>
         window.onload = function() {
-            const tableBody = document.getElementById('routing-history-table-body');
-            const rowHeight = 38; // Approximate height of a row in pixels
-            const a4Height = 1123; // A4 height in pixels at 96 DPI
-            const contentHeight = 500; // Adjusted height of content above the table
-            const availableHeight = a4Height - contentHeight;
-            const existingRows = tableBody.getElementsByTagName('tr').length;
-            const maxRows = Math.floor(availableHeight / rowHeight);
-            let rowsToAdd = maxRows - existingRows;
+            // Use a slight delay to ensure all content is rendered before calculating height
+            setTimeout(function() {
+                const tableBody = document.getElementById('routing-history-table-body');
+                const rowHeight = 38; // Approximate height of a row in pixels, adjust if necessary
+                const a4Height = 1123; // A4 height in pixels at 96 DPI for portrait mode
 
-            if (rowsToAdd > 0) {
-                for (let i = 0; i < rowsToAdd; i++) {
-                    const newRow = tableBody.insertRow();
-                    for (let j = 0; j < 6; j++) {
-                        const newCell = newRow.insertCell();
-                        newCell.innerHTML = '&nbsp;';
+                // Use scrollHeight on the body for a more accurate measure of total content height
+                const totalHeight = document.body.scrollHeight;
+
+                // Calculate the height of the content on the final page
+                const contentOnFinalPage = totalHeight % a4Height;
+
+                let remainingHeight;
+
+                if (contentOnFinalPage === 0) {
+                    // Content perfectly fills the pages, no rows needed.
+                    remainingHeight = 0;
+                } else {
+                    // Calculate the empty space on the final page
+                    remainingHeight = a4Height - contentOnFinalPage;
+                }
+
+                const rowsToAdd = Math.floor(remainingHeight / rowHeight);
+
+                if (rowsToAdd > 0) {
+                    for (let i = 0; i < rowsToAdd; i++) {
+                        const newRow = tableBody.insertRow();
+                        for (let j = 0; j < 6; j++) {
+                            const newCell = newRow.insertCell();
+                            newCell.innerHTML = '&nbsp;';
+                        }
                     }
                 }
-            }
 
-            window.print();
+                window.print();
+            }, 100); // 100ms delay
         }
     </script>
 </body>

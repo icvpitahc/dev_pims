@@ -189,7 +189,7 @@
                         <table class="table table-hover table-striped">
                             <thead>
                                 <tr>
-                                    <th style="text-align: center">Actions</th>
+                                    <th style="text-align: center; min-width: 100px;">Actions</th>
                                     <th style="text-align: center">Status</th>
                                     <th style="text-align: center">Tracking #</th>
                                     <th style="text-align: center">Document Title</th>
@@ -206,8 +206,9 @@
                                         @if($document->status == 'Ongoing') table-warning @endif
                                         @if($document->status == 'Completed') table-success @endif
                                         @if($document->status == 'Discarded') table-danger @endif
+                                        @if($document->extremely_urgent_id == 1) urgent-row @endif
                                     ">
-                                        <td style="text-align: center">
+                                        <td style="text-align: center; white-space: nowrap;">
                                             <button class="btn btn-primary btn-sm" wire:click.prevent="editDocument({{ $document->id }})">
                                                 <i class="fas fa-search"></i>
                                             </button>
@@ -299,6 +300,13 @@
                                         {{ $selectedDocument->specify_attachments ?? '(No attachments)' }}
                                     </div>
                                 </div>
+                                @if($selectedDocument->extremely_urgent_id == 1)
+                                <div class="row invoice-info mt-4">
+                                    <div class="col-12 text-left">
+                                        <div class="stamp">Extremely Urgent</div>
+                                    </div>
+                                </div>
+                                @endif
                             </div>
                             <div class="col-4 d-flex flex-column align-items-center justify-content-center">
                                 <img src="https://barcode.tec-it.com/barcode.ashx?data={{ route('documents.public.show', ['tracking_number' => \Crypt::encryptString($selectedDocument->document_reference_code)]) }}&code=QRCode&dpi=96" alt="qrcode"/>
@@ -312,8 +320,8 @@
                             <table class="table table-bordered">
                                 <thead class="thead-light">
                                     <tr style="text-align: center; vertical-align: middle;">
-                                        <th>Date Created/Forwarded</th>
-                                        <th>Received by</th>
+                                        <th>Date Created/Received</th>
+                                        <th>Date Forwarded</th>
                                         <th>From</th>
                                         <th>To</th>
                                         <th>Action/Remarks</th>
@@ -324,16 +332,22 @@
                                     @if ($selectedDocumentLogs)
                                         @foreach ($selectedDocumentLogs as $log)
                                             <tr>
-                                                <td>{{ ($log->forwarded_date ?? $log->created_at)->format('M d, Y h:i A') }}</td>
                                                 <td>
-                                                    @if ($log->received_date)
-                                                        {{ $log->received_date->format('M d, Y h:i A') }} by {{ $log->userReceived->signature_name ?? '' }}
+                                                    @if ($loop->first)
+                                                        Created at {{ $log->created_at->format('M d, Y h:i A') }} by {{ $log->userCreated->signature_name }}
+                                                    @else
+                                                        Received at {{ $log->created_at->format('M d, Y h:i A') }} by {{ $log->userCreated->signature_name ?? '' }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($log->forwarded_date)
+                                                        Forwarded at {{ $log->forwarded_date->format('M d, Y h:i A') }} by {{ $log->userForwarded->signature_name ?? '' }}
                                                     @endif
                                                 </td>
                                                 <td>{{ $log->fromDivision->division_name }}</td>
                                                 <td>{{ $log->toDivision->division_name ?? '' }}</td>
                                                 <td>{{ $log->remarks }}</td>
-                                                <td>{{ $log->userCreated->signature_name }}</td>
+                                                <td>{{ $log->userForwarded->signature_name ?? '' }}</td>
                                             </tr>
                                         @endforeach
                                     @endif
@@ -409,6 +423,12 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="extremely_urgent" wire:model="extremely_urgent">
+                                <label class="custom-control-label" for="extremely_urgent" style="color: red; text-transform: uppercase;">Extremely Urgent</label>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -510,6 +530,20 @@
 
 @push('scripts')
     <style>
+        .stamp {
+            border: 3px double red;
+            color: red;
+            font-weight: bold;
+            padding: 8px 20px;
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .urgent-row td {
+            color: red !important;
+            font-weight: bold !important;
+        }
         .summary-card {
             border-radius: 0.5rem;
             border: none;

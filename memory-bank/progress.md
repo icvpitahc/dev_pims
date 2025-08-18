@@ -41,6 +41,8 @@ The project has successfully completed the dependency upgrade phase. The current
     *   **Created Public Document View:** Implemented a mobile-friendly, public-facing page for viewing a document's history, accessible via a QR code.
 *   **Added Public Document Receiving:** Implemented a feature to allow public users to receive documents by entering their employee ID number.
 *   **Refactored CSS Results Page:** Refactored the "Client Satisfaction Measurement Results" page to use a dedicated controller for API requests, resolving an issue with the graphs not displaying.
+*   **Manually Updated Schema:** The `documents` table was manually updated to include an `extremely_urgent_id` column.
+*   **Implemented "Extremely Urgent" Feature:** Added a checkbox to the creation form and visual indicators (red/bold text and a stamp) to all relevant views to highlight urgent documents.
 
 ## What Works
 
@@ -60,6 +62,7 @@ The project has successfully completed the dependency upgrade phase. The current
 *   The document list now shows all documents that have interacted with the user's division.
 *   The public document receiving feature is fully functional with ID validation and user feedback.
 *   The "Client Satisfaction Measurement Results" page is now fully functional.
+*   The "Extremely Urgent" document feature is fully functional.
 
 ## What's Left to Build
 

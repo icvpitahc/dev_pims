@@ -45,8 +45,14 @@ The primary focus is now on refactoring the application's Livewire components to
     *   **Input Sanitization:** Added `strip_tags` to the registration process to prevent the storage of malicious HTML.
     *   **IP Address Resolution:** Configured the `TrustProxies` middleware to correctly capture user IP addresses behind a reverse proxy.
 *   **XSS Prevention:** Verified that the user list page properly escapes output, mitigating the risk of XSS attacks.
-*   **Refactored CSS Results Page:** Refactored the "Client Satisfaction Measurement Results" page to use a dedicated controller for API requests, resolving an issue with the graphs not displaying.
-*   **Reviewed User Management:** The `ListUsers` page was reviewed and found to be functional at a basic level, but contains several bugs and inconsistencies, including incorrect filter labels, broken links, and calls to undefined methods. This is likely a result of the ongoing Laravel 9 upgrade and will need to be addressed during the component refactoring phase.
+    *   **Refactored CSS Results Page:** Refactored the "Client Satisfaction Measurement Results" page to use a dedicated controller for API requests, resolving an issue with the graphs not displaying.
+    *   **Reviewed User Management:** The `ListUsers` page was reviewed and found to be functional at a basic level, but contains several bugs and inconsistencies, including incorrect filter labels, broken links, and calls to undefined methods. This is likely a result of the ongoing Laravel 9 upgrade and will need to be addressed during the component refactoring phase.
+    *   **Manually Updated Schema:** The `documents` table was manually updated to include an `extremely_urgent_id` column to support a new feature for flagging urgent documents.
+    *   **Implemented "Extremely Urgent" Feature:**
+        *   Added a styled checkbox to the document creation form.
+        *   Implemented logic to save the urgent status to the database.
+        *   Added a visual indicator (bold, red text) to the main document list for urgent items.
+        *   Added a styled "stamp" to the document details modal and the print view to clearly mark urgent documents.
 
 ## Key Activities
 
@@ -55,7 +61,7 @@ The primary focus is now on refactoring the application's Livewire components to
 
 ## Decisions and Considerations
 
-*   **Database Schema Alignment:** The database schema is being updated to support new features, such as the document tracking module.
+*   **Database Schema Alignment:** The database schema is being updated to support new features, such as the document tracking module. This includes both formal migrations and occasional manual additions as new requirements are identified.
 *   **No Page Deletions:** All existing pages will be preserved.
 *   **Compatibility-Focused Changes:** All modifications will be made strictly for the purpose of achieving compatibility with Laravel 9.
 *   **Bootstrap 4 Legacy:** It has been identified that the core application layout (`b_app.blade.php`) uses Bootstrap 4 via the AdminLTE theme. While new and modernized pages use Bootstrap 5, a full migration of the core layout has been deferred to a later date due to its complexity. This represents a piece of technical debt that will need to be addressed in the future.

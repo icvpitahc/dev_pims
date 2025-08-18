@@ -4,6 +4,6 @@ The primary objective of this project is to upgrade the Personnel Information Ma
 
 The project involves a comprehensive analysis of the existing codebase, a careful update of all dependencies, and a thorough refactoring of any components affected by breaking changes, with a particular focus on Livewire components and the `rappasoft/laravel-livewire-tables` package.
 
-All modifications will be strictly for compatibility purposes. No changes will be made to the database schema, and no existing pages will be deleted.
+All modifications will be strictly for compatibility purposes. No existing pages will be deleted.
 
-**Update:** The project scope has been expanded to include modernizing the user interface, starting with the authentication pages.
+**Update:** The project scope has been expanded to include modernizing the user interface and implementing new features in the Document Tracking module, which has required additions to the database schema.
