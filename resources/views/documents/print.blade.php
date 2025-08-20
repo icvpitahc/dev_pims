@@ -81,9 +81,13 @@
                     </div>
                 </div>
                 <div class="row invoice-info">
-                    <div class="col-sm-12 invoice-col">
+                    <div class="col-sm-6 invoice-col">
                         <strong>Attachments:</strong><br>
                         {{ $document->specify_attachments ?? '(No attachments)' }}
+                    </div>
+                    <div class="col-sm-6 invoice-col">
+                        <strong>Deadline:</strong><br>
+                        {{ $document->expected_completion_date ? \Carbon\Carbon::parse($document->expected_completion_date)->format('M d, Y') : '(Not set)' }}
                     </div>
                 </div>
                 @if($document->extremely_urgent_id == 1)

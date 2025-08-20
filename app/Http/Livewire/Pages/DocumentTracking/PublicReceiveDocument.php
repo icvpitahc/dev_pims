@@ -47,6 +47,7 @@ class PublicReceiveDocument extends Component
             ]);
 
             $this->dispatchBrowserEvent('success-message', ['message' => 'Document successfully received.']);
+            $this->dispatchBrowserEvent('action-taken');
         } else {
             $this->dispatchBrowserEvent('error-message', ['message' => 'Invalid ID number or you are not authorized to receive this document.']);
         }
@@ -82,6 +83,7 @@ class PublicReceiveDocument extends Component
             $activeLog->update($updateData);
 
             $this->dispatchBrowserEvent('success-message', ['message' => 'Action successfully recorded.']);
+            $this->dispatchBrowserEvent('action-taken');
         } else {
             $this->dispatchBrowserEvent('error-message', ['message' => 'Invalid Employee Number. You are not authorized to take action from this division.']);
         }

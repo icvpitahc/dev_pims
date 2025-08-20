@@ -17,6 +17,7 @@ class CreateDocumentsTable extends Migration
             $table->id();
             $table->string('document_reference_code')->nullable();
             $table->integer('extremely_urgent_id')->nullable();
+            $table->date('expected_completion_date')->nullable();
             $table->integer('document_type_id')->nullable();
             $table->integer('document_sub_type_id')->nullable();
             $table->string('document_title')->nullable();

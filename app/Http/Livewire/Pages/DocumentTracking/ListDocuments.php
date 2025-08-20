@@ -24,6 +24,7 @@ class ListDocuments extends Component
     public $to_division_id = '';
     public $remarks = '';
     public $extremely_urgent;
+    public $expected_completion_date;
 
     public $selectedDocument;
     public $selectedDocumentLogs;
@@ -62,16 +63,16 @@ class ListDocuments extends Component
         $this->remarks = '';
         $this->documentSubTypes = [];
         $this->extremely_urgent = false;
+        $this->expected_completion_date = '';
     }
 
-    private function getDivisionInitials($name)
+    public function getDivisionInitials($name)
     {
-        $words = explode(' ', $name);
-        $initials = '';
-        foreach ($words as $word) {
-            $initials .= strtoupper(substr($word, 0, 1));
+        if ($name === 'N/A') {
+            return 'N/A';
         }
-        return $initials;
+        preg_match_all('/[A-Z]/', $name, $matches);
+        return implode('', $matches[0]);
     }
 
     public function store()
@@ -84,6 +85,7 @@ class ListDocuments extends Component
             'note' => 'nullable|string',
             'to_division_id' => 'required',
             'remarks' => 'required|string',
+            'expected_completion_date' => 'nullable|date|after_or_equal:today',
         ]);
 
         $user = auth()->user();
@@ -108,6 +110,7 @@ class ListDocuments extends Component
             'division_id' => $user->division_id,
             'created_by' => $user->id,
             'extremely_urgent_id' => $this->extremely_urgent ? 1 : null,
+            'expected_completion_date' => $this->expected_completion_date,
         ]);
 
         DocumentLog::create([

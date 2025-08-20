@@ -56,8 +56,19 @@
             font-weight: 600;
         }
         .header-card {
-            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
             color: #fff;
+        }
+        .header-card-pending {
+            background: linear-gradient(135deg, #17a2b8 0%, #117a8b 100%);
+        }
+        .header-card-ongoing {
+            background: linear-gradient(135deg, #ffc107 0%, #d39e00 100%);
+        }
+        .header-card-completed {
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+        }
+        .header-card-discarded {
+            background: linear-gradient(135deg, #dc3545 0%, #b02a37 100%);
         }
         .bg-info-light { background-color: #e6f7ff; color: #0056b3 !important; }
         .bg-warning-light { background-color: #fffbe6; color: #8a6d3b !important; }
@@ -66,13 +77,28 @@
         .bg-info-light .text-muted, .bg-warning-light .text-muted, .bg-success-light .text-muted, .bg-danger-light .text-muted {
             color: inherit !important;
         }
+        .stamp {
+            border: 3px double red !important;
+            color: red !important;
+            font-weight: bold !important;
+            padding: 8px 20px !important;
+            text-transform: uppercase !important;
+            font-size: 1.5rem !important;
+            display: inline-block !important;
+            margin-top: 10px !important;
+        }
     </style>
     <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
     @livewireStyles
 </head>
 <body>
     <div class="container py-4">
-        <div class="card shadow-sm mb-4 header-card">
+        <div class="card shadow-sm mb-4 header-card 
+            @if($document->status == 'Pending') header-card-pending @endif
+            @if($document->status == 'Ongoing') header-card-ongoing @endif
+            @if($document->status == 'Completed') header-card-completed @endif
+            @if($document->status == 'Discarded') header-card-discarded @endif
+        ">
             <div class="card-body text-center">
                 <h2 class="h4 mb-1"><strong>{{ $document->document_title }}</strong></h2>
                 <p class="mb-0">Tracking #: {{ $document->document_reference_code }}</p>
@@ -80,8 +106,14 @@
         </div>
 
         <div class="card shadow-sm mb-4">
-            <div class="card-header bg-light">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Document Details</h5>
+                <span class="badge 
+                    @if($document->status == 'Pending') badge-info @endif
+                    @if($document->status == 'Ongoing') badge-warning @endif
+                    @if($document->status == 'Completed') badge-success @endif
+                    @if($document->status == 'Discarded') badge-danger @endif
+                ">{{ $document->status }}</span>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -101,14 +133,23 @@
                         <strong>Sub-Type:</strong><br>
                         {{ $document->document_sub_type->document_sub_type_name }}
                     </div>
-                    <div class="col-12 mb-3">
+                    <div class="col-md-6 mb-3">
                         <strong>Note:</strong><br>
                         {{ $document->note ?? '(No notes)' }}
                     </div>
-                    <div class="col-12">
+                    <div class="col-md-6 mb-3">
                         <strong>Attachments:</strong><br>
                         {{ $document->specify_attachments ?? '(No attachments)' }}
                     </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Deadline:</strong><br>
+                        {{ $document->expected_completion_date ? \Carbon\Carbon::parse($document->expected_completion_date)->format('M d, Y') : '(Not set)' }}
+                    </div>
+                    @if($document->extremely_urgent_id == 1)
+                    <div class="col-12 mt-3">
+                        <div class="stamp">Extremely Urgent</div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -199,6 +240,9 @@
             });
             window.addEventListener('error-message', event=> {
                 toastr.error(event.detail.message, 'Error!');
+            });
+            window.addEventListener('action-taken', event=> {
+                location.reload();
             });
         });
     </script>

@@ -29,7 +29,7 @@
 </li>
 @elseif( request()->is('pages/document-tracking/*') )
 <li class="nav-item">
-	<a href="" class="nav-link">
+	<a href="{{ route('document-tracking-dashboard') }}" class="nav-link {{ request()->is('pages/document-tracking/dashboard') ? 'active' : '' }}">
 		<i class="nav-icon fas fa-chart-bar"></i>
 		<p>Dashboard</p>
 	</a>
@@ -58,7 +58,7 @@
 </li>
 @elseif( request()->is('pages/ict-request/*') )
 <li class="nav-item">
-	<a href="" class="nav-link">
+	<a href="{{ route('ict-request-dashboard') }}" class="nav-link {{ request()->is('pages/ict-request/dashboard') ? 'active' : '' }}">
 		<i class="nav-icon fas fa-chart-bar"></i>
 		<p>Dashboard</p>
 	</a>
@@ -171,4 +171,3 @@
 	</form>
 </li>
 @endif
-

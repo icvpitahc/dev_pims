@@ -36,7 +36,26 @@ The primary focus is now on refactoring the application's Livewire components to
     *   **Accurate Summary Cards:** Refactored the summary card queries to be based on all documents involving the user's division (created, sent, or received), not just those they created. Added a new "Total Documents Involved" card to reflect this complete count.
     *   **Improved Location Logic:** The "Current Location" for completed or discarded documents now correctly shows the last division that handled it, instead of "N/A".
     *   **Printable View:** Implemented a printable version of the Document Monitoring Slip, complete with a print button and A4-optimized styling.
-    *   **Public Document View:** Implemented a mobile-friendly, public-facing page for viewing a document's history, accessible via a QR code, and a feature for public users to receive documents.
+    *   **Enhanced Public Document View:**
+        *   Implemented a mobile-friendly, public-facing page for viewing a document's history, accessible via a QR code.
+        *   Added a feature for public users to receive documents.
+        *   Added a visual "Extremely Urgent" stamp to clearly mark urgent documents.
+        *   Implemented a dynamic header that changes color based on the document's status (Pending, Ongoing, Completed, Discarded).
+        *   Added a "Pending" status to the public view to indicate when a document has been forwarded but not yet received.
+        *   Implemented an automatic page refresh after an action is taken to ensure the view is always up-to-date.
+*   **Enhanced Document Creation:**
+    *   Added an "Expected Completion Date" field to the document creation form.
+    *   Implemented validation to prevent the selection of past dates.
+    *   Added visual identifiers for all required fields in the creation form.
+*   **Improved Document Views:**
+    *   Added a "Deadline" field to the edit, print, and public views to display the expected completion date.
+    *   Abbreviated the "Origin" and "Current Location" columns in the main document list to save space.
+    *   Renamed the "Document Date" column to "Created" for clarity.
+*   **Document Tracking Dashboard:**
+    *   Created a new dashboard page for document tracking.
+    *   Implemented summary cards for key metrics, including total documents, documents in circulation, completed documents, overdue documents, pending documents, and discarded documents.
+    *   Added charts to visualize documents by type, document volume by day (for the last 30 days), documents by division, and overdue documents by division.
+    *   Modernized the "Recent Activity" table with a condensed layout, a link to view document details, and a human-readable "Last Updated" timestamp.
 *   **Data Integrity and Auditing:**
     *   **Cascading Soft Deletes:** Implemented a robust soft delete system for documents. When a document is deleted, all of its associated tracking logs are now also soft-deleted.
     *   **User Tracking on Deletes:** The user ID of the person who deleted a document is now recorded on both the document and all of its logs.

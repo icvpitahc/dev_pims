@@ -22,6 +22,7 @@ class Document extends Model implements Auditable
         'created_by',
         'deleted_by',
         'extremely_urgent_id',
+        'expected_completion_date',
     ];
 
     public function document_type()
@@ -92,6 +93,11 @@ class Document extends Model implements Auditable
             if (auth()->check()) {
                 $user = auth()->user();
                 if ($this->latestActiveLog && $this->latestActiveLog->to_division_id == $user->division_id) {
+                    return 'Pending';
+                }
+            } else {
+                // Public view logic
+                if ($this->latestActiveLog && $this->latestActiveLog->action_id == 1) {
                     return 'Pending';
                 }
             }

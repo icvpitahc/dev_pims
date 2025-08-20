@@ -196,7 +196,8 @@
                                     <th style="text-align: center">Document Type</th>
                                     <th style="text-align: center">Origin</th>
                                     <th style="text-align: center">Current Location</th>
-                                    <th style="text-align: center">Document Date</th>
+                                    <th style="text-align: center">Created</th>
+                                    <th style="text-align: center">Due Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -220,9 +221,10 @@
                                         <td style="text-align: center">{{ $document->document_reference_code }}</td>
                                         <td style="text-align: center">{{ $document->document_title }}</td>
                                         <td style="text-align: center">{{ $document->document_type->document_type_name }}</td>
-                                        <td style="text-align: center">{{ $document->division->division_name }}</td>
-                                        <td style="text-align: center">{{ $document->current_location }}</td>
+                                        <td style="text-align: center">{{ $this->getDivisionInitials($document->division->division_name) }}</td>
+                                        <td style="text-align: center">{{ $this->getDivisionInitials($document->current_location) }}</td>
                                         <td style="text-align: center">{{ $document->created_at->format('M d, Y h:i A') }}</td>
+                                        <td style="text-align: center">{{ $document->expected_completion_date ? \Carbon\Carbon::parse($document->expected_completion_date)->format('M d, Y') : '' }}</td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -295,9 +297,13 @@
                                     </div>
                                 </div>
                                 <div class="row invoice-info mt-3">
-                                    <div class="col-sm-12 invoice-col">
+                                    <div class="col-sm-6 invoice-col">
                                         <strong>Attachments:</strong><br>
                                         {{ $selectedDocument->specify_attachments ?? '(No attachments)' }}
+                                    </div>
+                                    <div class="col-sm-6 invoice-col">
+                                        <strong>Deadline:</strong><br>
+                                        {{ $selectedDocument->expected_completion_date ? \Carbon\Carbon::parse($selectedDocument->expected_completion_date)->format('M d, Y') : '(Not set)' }}
                                     </div>
                                 </div>
                                 @if($selectedDocument->extremely_urgent_id == 1)
@@ -423,16 +429,26 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="extremely_urgent" wire:model="extremely_urgent">
-                                <label class="custom-control-label" for="extremely_urgent" style="color: red; text-transform: uppercase;">Extremely Urgent</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="extremely_urgent" wire:model="extremely_urgent">
+                                        <label class="custom-control-label" for="extremely_urgent" style="color: red; text-transform: uppercase;">Extremely Urgent</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="expected_completion_date">Expected Completion Date</label>
+                                    <input type="date" class="form-control" id="expected_completion_date" wire:model="expected_completion_date" min="{{ date('Y-m-d') }}">
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="document_type_id">Document Type</label>
+                                    <label for="document_type_id">Document Type <span class="text-danger">*</span></label>
                                     <select class="form-control" id="document_type_id" wire:model="document_type_id">
                                         <option value="">Select Document Type</option>
                                         @foreach($documentTypes as $type)
@@ -444,7 +460,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="document_sub_type_id">Document Sub-Type</label>
+                                    <label for="document_sub_type_id">Document Sub-Type <span class="text-danger">*</span></label>
                                     <select class="form-control" id="document_sub_type_id" wire:model="document_sub_type_id">
                                         <option value="">Select Document Sub-Type</option>
                                         @if($documentSubTypes)
@@ -458,7 +474,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="document_title">Document Title</label>
+                            <label for="document_title">Document Title <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="document_title" placeholder="Enter document title" wire:model="document_title">
                             @error('document_title') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
@@ -475,7 +491,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="to_division_id">Forward To</label>
+                                    <label for="to_division_id">Forward To <span class="text-danger">*</span></label>
                                     <select class="form-control" id="to_division_id" wire:model="to_division_id">
                                         <option value="">Select Division</option>
                                         @foreach($formDivisions as $division)
@@ -487,7 +503,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="remarks">Remarks</label>
+                            <label for="remarks">Remarks <span class="text-danger">*</span></label>
                             <textarea class="form-control" id="remarks" rows="3" placeholder="Enter remarks" wire:model="remarks"></textarea>
                             @error('remarks') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>

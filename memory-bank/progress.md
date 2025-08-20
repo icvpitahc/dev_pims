@@ -38,7 +38,21 @@ The project has successfully completed the dependency upgrade phase. The current
     *   **Implemented Document Receiving Workflow:** Added a new two-step process for receiving and then taking action on documents, including a `received_date` in the `document_logs` table for more precise tracking.
     *   **Enhanced Document Visibility:** Updated the main document list to show all documents that have been routed to or from a user's division, providing a complete history.
     *   **Improved UI Logic:** Refined the conditions for enabling the "Edit" button and displaying the "Current Location" to better reflect the document's state.
-    *   **Created Public Document View:** Implemented a mobile-friendly, public-facing page for viewing a document's history, accessible via a QR code.
+    *   **Enhanced Public Document View:**
+        *   Implemented a mobile-friendly, public-facing page for viewing a document's history, accessible via a QR code.
+        *   Added a feature for public users to receive documents.
+        *   Added a visual "Extremely Urgent" stamp to clearly mark urgent documents.
+        *   Implemented a dynamic header that changes color based on the document's status (Pending, Ongoing, Completed, Discarded).
+        *   Added a "Pending" status to the public view to indicate when a document has been forwarded but not yet received.
+        *   Implemented an automatic page refresh after an action is taken to ensure the view is always up-to-date.
+*   **Enhanced Document Creation:**
+    *   Added an "Expected Completion Date" field to the document creation form.
+    *   Implemented validation to prevent the selection of past dates.
+    *   Added visual identifiers for all required fields in the creation form.
+*   **Improved Document Views:**
+    *   Added a "Deadline" field to the edit, print, and public views to display the expected completion date.
+    *   Abbreviated the "Origin" and "Current Location" columns in the main document list to save space.
+    *   Renamed the "Document Date" column to "Created" for clarity.
 *   **Added Public Document Receiving:** Implemented a feature to allow public users to receive documents by entering their employee ID number.
 *   **Refactored CSS Results Page:** Refactored the "Client Satisfaction Measurement Results" page to use a dedicated controller for API requests, resolving an issue with the graphs not displaying.
 *   **Manually Updated Schema:** The `documents` table was manually updated to include an `extremely_urgent_id` column.
@@ -58,8 +72,9 @@ The project has successfully completed the dependency upgrade phase. The current
 *   The auditing feature now correctly logs the user's public IP address.
 *   The summary cards on the document tracking page have been modernized with a new design and short descriptions.
 *   The document receiving workflow is fully functional.
-*   The public document view is mobile-friendly and displays the complete routing history.
-*   The document list now shows all documents that have interacted with the user's division.
+*   The public document view is mobile-friendly and displays the complete routing history, including a dynamic, color-coded header and an "Extremely Urgent" stamp. It also automatically refreshes after an action is taken.
+*   The document list now shows all documents that have interacted with the user's division, and includes a "Due Date" column. The "Origin" and "Current Location" columns have been abbreviated to save space.
+*   A new document tracking dashboard has been created with a variety of charts and summary cards to provide a comprehensive overview of the document tracking system.
 *   The public document receiving feature is fully functional with ID validation and user feedback.
 *   The "Client Satisfaction Measurement Results" page is now fully functional.
 *   The "Extremely Urgent" document feature is fully functional.

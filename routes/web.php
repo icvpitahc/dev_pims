@@ -39,6 +39,8 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+Route::get('/pages/document-tracking/dashboard', \App\Http\Livewire\Pages\DocumentTracking\Dashboard::class)->name('document-tracking-dashboard');
+
 Route::get('/documents/track/{tracking_number}', [DocumentController::class, 'publicShow'])->name('documents.public.show');
 
 Route::get('/pages/css/css-form', CssForm::class)->name('css-form');
@@ -81,6 +83,7 @@ Route::group(['middleware' => ['auth', 'verified', 'activated.account']], functi
 
     Route::get('/pages/document-tracking/list-documents', ListDocuments::class)->name('list-documents');
     Route::get('/documents/{document}/print', [DocumentController::class, 'print'])->name('documents.print');
+    Route::get('/pages/ict-request/dashboard', \App\Http\Livewire\Pages\IctRequest\Dashboard::class)->name('ict-request-dashboard');
     Route::get('/pages/ict-request/list-ict-requests', ListIctRequests::class)->name('list-ict-requests');
     Route::get('/pages/issuance/list-issuances/', ListIssuances::class)->name('list-issuances');
 });

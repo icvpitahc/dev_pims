@@ -92,7 +92,7 @@
                             <i class="fas fa-file-signature icon icon-docs"></i>
                             <h5 class="module-title">Document Tracking</h5>
                             <p class="module-description">Trace and monitor official documents.</p>
-                            <a href="{{ route('list-documents') }}" class="btn btn-success">Go to Module</a>
+                            <a href="{{ route('document-tracking-dashboard') }}" class="btn btn-success">Go to Module</a>
                         </div>
                     </div>
                     <div class="col-md-3 mb-4">
